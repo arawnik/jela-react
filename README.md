@@ -7,6 +7,7 @@ This is a [React](https://react.dev) (with [Next.js](https://nextjs.org) framewo
 # Getting Started
 
 ## Prerequisites
+
 - [Node.js](https://nodejs.org/en) (developed with v20.18.0)
 
 ## Testing locally
@@ -19,4 +20,3 @@ This is a [React](https://react.dev) (with [Next.js](https://nextjs.org) framewo
 0. Install [Docker](https://www.docker.com/) on your machine
 1. Build your container: `docker build -t nextjs-docker .`
 2. Run your container: `docker run -p 3000:3000 nextjs-docker`
-
