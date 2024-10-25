@@ -1,9 +1,8 @@
-import { Project } from '@/models/project';
 import { ContactForm } from '@/models/contact-form';
-import { CoverInfo } from '@/models/cover-info';
+import { Education, Experience, Introduction, Keyword, KeywordType } from '@/models/cover-models';
 
-const API_BASE_URL = 'http://localhost:8000/api';
-
+const API_BASE_URL = 'http://localhost:8083/api';
+/*
 export class JelaApi {
   // Return static frontpage data
   static async getFrontpageData(): Promise<CoverInfo> {
@@ -37,39 +36,45 @@ export class JelaApi {
     console.log('Mock contact form submitted:', formData);
     // Here you can simulate a success response, no need for an actual HTTP request
   }
+}*/
+
+export class JelaApi {
+  // Helper function to handle fetch requests and errors
+  private static async fetchJson<T>(url: string): Promise<T> {
+    const response = await fetch(url);
+    if (!response.ok) {
+      throw new Error(`Failed to fetch ${url}`);
+    }
+    return response.json();
+  }
+
+  // Fetch Introduction data
+  public static async getIntroduction(): Promise<Introduction | null> {
+    return JelaApi.fetchJson<Introduction>(`${API_BASE_URL}/introduction/`);
+  }
+
+  // Fetch Experiences data
+  public static async getExperiences(): Promise<Experience[]> {
+    return JelaApi.fetchJson<Experience[]>(`${API_BASE_URL}/experiences/`);
+  }
+
+  // Fetch Educations data
+  public static async getEducations(): Promise<Education[]> {
+    return JelaApi.fetchJson<Education[]>(`${API_BASE_URL}/educations/`);
+  }
+
+  // Fetch Keywords by type
+  public static async getKeywords(type: KeywordType): Promise<Keyword[]> {
+    return JelaApi.fetchJson<Keyword[]>(`${API_BASE_URL}/keywords/${type}/`);
+  }
+
+  public static async submitContactForm(formData: ContactForm) {
+    throw new Error('Method not implemented.');
+  }
+
+  public static async getProjects() {
+    throw new Error('Method not implemented.');
+  }
 }
 
-/*export class JelaApi {
-  // Fetch the frontpage cover data
-  static async getFrontpageData(): Promise<CoverInfo> {
-    const res = await fetch(`${API_BASE_URL}/frontpage`);
-    if (!res.ok) {
-      throw new Error('Failed to fetch frontpage data');
-    }
-    const data: CoverInfo = await res.json();
-    return data;
-  }
-
-  // Fetch the projects data
-  static async getProjects(): Promise<Project[]> {
-    const res = await fetch(`${API_BASE_URL}/projects`);
-    if (!res.ok) {
-      throw new Error('Failed to fetch projects');
-    }
-    const data: Project[] = await res.json();
-    return data;
-  }
-
-  // Submit contact form data
-  static async submitContactForm(formData: ContactForm): Promise<void> {
-    const res = await fetch(`${API_BASE_URL}/contact`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(formData),
-    });
-
-    if (!res.ok) {
-      throw new Error('Failed to submit contact form');
-    }
-  }
-}*/
+export default JelaApi;

@@ -1,0 +1,6 @@
+User-agent: *
+Disallow: /static/
+Disallow: /media/
+Disallow: /admin/
+Disallow: /language/
+Disallow: /contact/thankyou
