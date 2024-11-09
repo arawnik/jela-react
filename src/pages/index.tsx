@@ -7,7 +7,7 @@ import ExperienceSection from '@/components/sections/ExperienceSection';
 import EducationSection from '@/components/sections/EducationSection';
 import KeywordsSection from '@/components/sections/KeywordsSection';
 
-export const delay = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
+export const delay = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 
 const CoverPage = () => {
   const [intro, setIntro] = useState<Introduction | null>(null);
@@ -67,17 +67,17 @@ const CoverPage = () => {
   return (
     <>
       <Head>
-        <title>{intro ? intro.title : "Loading..."}</title>
+        <title>{intro ? intro.title : 'Loading...'}</title>
       </Head>
       <main>
         <IntroductionSection intro={intro} />
-        <ExperienceSection experiences={experiences} />
-        <EducationSection educations={educations} />
         <KeywordsSection
           skills={skills}
           technologies={technologies}
           programmingLanguages={programmingLanguages}
         />
+        <EducationSection educations={educations} />
+        <ExperienceSection experiences={experiences} />
       </main>
     </>
   );

@@ -3,7 +3,7 @@ export interface Introduction {
   content: string;
   tagline: string;
   avatar: string; // URL for the avatar image
-  small_avatar: string; // URL for the small avatar image
+  smallAvatar: string; // URL for the small avatar image
   pdf: string; // URL for the PDF file
 }
 
@@ -44,14 +44,14 @@ export interface Experience {
   description: string;
   company: Company;
   keywords: Keyword[];
-  start_date: string; // Date in string format
-  end_date: string; // Date in string format or null
+  startDate: string; // Date in string format
+  endDate: string; // Date in string format or null
 }
 
 export interface Education {
   title: string;
   description: string;
   institution: Institution;
-  start_date: string;
-  end_date: string;
+  startDate: string;
+  endDate: string;
 }

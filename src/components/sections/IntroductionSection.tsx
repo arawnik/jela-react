@@ -1,31 +1,98 @@
 import { Introduction } from '@/models/cover-models';
 
 interface IntroductionSectionProps {
-    intro: Introduction | null;
+  intro: Introduction | null;
 }
 
 const IntroductionSection: React.FC<IntroductionSectionProps> = ({ intro }) => (
-    <section>
-        {intro ? (
-            // Actual data display
-            <>
-                <h1>{intro.title}</h1>
-                <p>{intro.content}</p>
-                <p><strong>Tagline:</strong> {intro.tagline}</p>
-                <img src={"https://jerejunttila.fi" + intro.avatar} alt="Avatar" className="img-fluid" />
-                <a href={intro.pdf} target="_blank" rel="noopener noreferrer">Download PDF</a>
-            </>
-        ) : (
-            // Placeholders
-            <>
-                <h1><span className="placeholder col-6"></span></h1>
-                <p><span className="placeholder col-8"></span></p>
-                <p><strong>Tagline:</strong> <span className="placeholder col-4"></span></p>
-                <div className="placeholder col-6" style={{ height: '150px', backgroundColor: '#e9ecef' }}></div>
-                <span className="placeholder col-3"></span>
-            </>
-        )}
-    </section>
+  <section>
+    <div className="container container-narrow text-center">
+      <p className="aphorism">
+        “Your present circumstances don't determine where you can go; they merely determine where you start”
+      </p>
+      <p className="author">&mdash; Nido Qubein</p>
+    </div>
+    <div className="container container-narrow my-5">
+      {intro ? (
+        <div className="row py-0 d-flex flex-wrap align-items-center justify-content-center justify-content-md-between rounded-2 well">
+          <div className="col-md-6 col-lg-5 p-0">
+            <div className="avatar-image ms-md-3 ms-lg-4 ms-auto me-auto">
+              <picture>
+                <source
+                  media="(max-width:767px)"
+                  srcSet={'https://jerejunttila.fi' + intro.smallAvatar}
+                  width="400"
+                  height="208"
+                />
+                <img
+                  src={'https://jerejunttila.fi' + intro.avatar}
+                  className="img-fluid"
+                  alt="Avatar"
+                  width="400"
+                  height="673"
+                />
+              </picture>
+            </div>
+          </div>
+          <div className="col-md-6 col-lg-7 p-3 mt-md-3 align-self-md-center">
+            <h1 className="easy-font display-4 mb-0">Jere Junttila</h1>
+            <p className="popout-font header-subinfo">&lt; {intro.title} &gt;</p>
+            <div dangerouslySetInnerHTML={{ __html: intro.content }} />
+            <p className="lead">{intro.tagline}</p>
+          </div>
+        </div>
+      ) : (
+        // Placeholders
+        <div className="row py-0 d-flex flex-wrap align-items-center justify-content-center justify-content-md-between rounded-2 well">
+          <div className="col-md-6 col-lg-5 p-0">
+            <div className="avatar-image ms-md-3 ms-lg-4 ms-auto me-auto">
+              <div
+                className="placeholder col-12"
+                style={{ height: '673px', width: '100%', backgroundColor: '#a3a6ad' }}
+              ></div>
+            </div>
+          </div>
+          {/* Placeholder for Text Content */}
+          <div className="col-md-6 col-lg-7 p-3 mt-md-3 align-self-md-center">
+            {/* Placeholder for Name */}
+            <h1 className="easy-font display-4 mb-0">
+              <span className="placeholder col-6"></span>
+            </h1>
+
+            {/* Placeholder for Title */}
+            <p className="popout-font header-subinfo">
+              <span className="placeholder col-2 mb-2"></span>
+              <span className="placeholder col-2 mb-2"></span>
+            </p>
+
+            {/* Placeholder for Main Content Text */}
+            <div className="content-placeholder">
+              {/* Simulate multiple lines of text for the paragraph structure */}
+              <p className="mb-2">
+                <span className="placeholder col-10 mb-2"></span>
+                <span className="placeholder col-8 mb-2"></span>
+                <span className="placeholder col-9 mb-2"></span>
+              </p>
+              <p className="mb-2">
+                <span className="placeholder col-9 mb-2"></span>
+                <span className="placeholder col-7 mb-2"></span>
+                <span className="placeholder col-8 mb-2"></span>
+              </p>
+              <p className="mb-2">
+                <span className="placeholder col-10 mb-2"></span>
+                <span className="placeholder col-6 mb-2"></span>
+              </p>
+            </div>
+
+            {/* Placeholder for Tagline */}
+            <p className="lead">
+              <span className="placeholder col-8"></span>
+            </p>
+          </div>
+        </div>
+      )}
+    </div>
+  </section>
 );
 
 export default IntroductionSection;

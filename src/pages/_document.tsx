@@ -1,3 +1,4 @@
+import HeaderComponent from '@/components/HeaderComponent';
 import Document, { Html, Head, Main, NextScript, DocumentContext } from 'next/document';
 
 class MyDocument extends Document {
@@ -8,7 +9,11 @@ class MyDocument extends Document {
 
   render() {
     return (
-      <Html lang="en">
+      <Html
+        lang="en"
+        className="h-100"
+        data-bs-theme="dark"
+      >
         <Head>
           {/* External Stylesheets */}
           <link
@@ -21,10 +26,17 @@ class MyDocument extends Document {
           />
           <link
             rel="stylesheet"
-            href="https://jerejunttila.fi/static/site.min.css"
+            href="http://127.0.0.1:8083/static/site.min.css"
           />
         </Head>
-        <body>
+        <body className="d-flex flex-column h-100 flex">
+          <HeaderComponent
+            languages={[
+              { code: 'en', name: 'English' },
+              { code: 'fi', name: 'Finnish' },
+            ]}
+            currentLang="en"
+          />
           <Main />
           <NextScript />
         </body>
