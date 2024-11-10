@@ -1,6 +1,6 @@
 export const i18n = {
   defaultLocale: 'en',
-  locales: ['en', 'fi'], // Define your supported locales here
+  locales: ['en', 'fi'],
 };
 
 export default { i18n };

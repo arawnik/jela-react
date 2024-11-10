@@ -1,4 +1,3 @@
-import HeaderComponent from '@/components/HeaderComponent';
 import Document, { Html, Head, Main, NextScript, DocumentContext } from 'next/document';
 
 class MyDocument extends Document {
@@ -30,13 +29,6 @@ class MyDocument extends Document {
           />
         </Head>
         <body className="d-flex flex-column h-100 flex">
-          <HeaderComponent
-            languages={[
-              { code: 'en', name: 'English' },
-              { code: 'fi', name: 'Finnish' },
-            ]}
-            currentLang="en"
-          />
           <Main />
           <NextScript />
         </body>

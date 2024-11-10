@@ -6,10 +6,18 @@ import IntroductionSection from '@/components/sections/IntroductionSection';
 import ExperienceSection from '@/components/sections/ExperienceSection';
 import EducationSection from '@/components/sections/EducationSection';
 import KeywordsSection from '@/components/sections/KeywordsSection';
+import { GetStaticProps } from 'next';
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
+import { useTranslation } from 'next-i18next';
 
-export const delay = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
+export const getStaticProps: GetStaticProps = async ({ locale }) => ({
+  props: {
+    ...(await serverSideTranslations(locale || 'en', ["common"])),
+  },
+});
 
 const CoverPage = () => {
+  const { i18n, t } = useTranslation('common');
   const [intro, setIntro] = useState<Introduction | null>(null);
   const [experiences, setExperiences] = useState<Experience[]>([]);
   const [educations, setEducations] = useState<Education[]>([]);
@@ -17,57 +25,49 @@ const CoverPage = () => {
   const [technologies, setTechnologies] = useState<Keyword[]>([]);
   const [programmingLanguages, setProgrammingLanguages] = useState<Keyword[]>([]);
 
+  // Function to fetch all data from the backend
+  const fetchData = async () => {
+    try {
+      const [introData, expData, eduData, skillData, techData, langData] = await Promise.all([
+        JelaApi.getIntroduction(),
+        JelaApi.getExperiences(),
+        JelaApi.getEducations(),
+        JelaApi.getKeywords(KeywordType.Skill),
+        JelaApi.getKeywords(KeywordType.Technology),
+        JelaApi.getKeywords(KeywordType.Language),
+      ]);
+
+      setIntro(introData);
+      setExperiences(expData);
+      setEducations(eduData);
+      setSkills(skillData);
+      setTechnologies(techData);
+      setProgrammingLanguages(langData);
+    } catch (error) {
+      console.error('Failed to fetch data:', error);
+    }
+  };
+
+  // Fetch data initially and on language change
   useEffect(() => {
-    // Fetch introduction with delay
-    delay(1500)
-      .then(() => JelaApi.getIntroduction())
-      .then(setIntro)
-      .catch(console.error);
+    fetchData();
 
-    // Fetch experiences with delay
-    delay(3000)
-      .then(() => JelaApi.getExperiences())
-      .then(setExperiences)
-      .catch(console.error);
+    const handleLanguageChange = () => {
+      fetchData();
+    };
 
-    // Fetch educations with delay
-    delay(4500)
-      .then(() => JelaApi.getEducations())
-      .then(setEducations)
-      .catch(console.error);
+    i18n.on('languageChanged', handleLanguageChange);
 
-    // Fetch skills with delay
-    delay(6000)
-      .then(() => JelaApi.getKeywords(KeywordType.Skill))
-      .then(setSkills)
-      .catch(console.error);
-
-    // Fetch technologies with delay
-    delay(7500)
-      .then(() => JelaApi.getKeywords(KeywordType.Technology))
-      .then(setTechnologies)
-      .catch(console.error);
-
-    // Fetch programming languages with delay
-    delay(9000)
-      .then(() => JelaApi.getKeywords(KeywordType.Language))
-      .then(setProgrammingLanguages)
-      .catch(console.error);
-  }, []);
-
-  /*useEffect(() => {
-    JelaApi.getIntroduction().then(setIntro).catch(console.error);
-    JelaApi.getExperiences().then(setExperiences).catch(console.error);
-    JelaApi.getEducations().then(setEducations).catch(console.error);
-    JelaApi.getKeywords(KeywordType.Skill).then(setSkills).catch(console.error);
-    JelaApi.getKeywords(KeywordType.Technology).then(setTechnologies).catch(console.error);
-    JelaApi.getKeywords(KeywordType.Language).then(setProgrammingLanguages).catch(console.error);
-  }, []);*/
+    // Clean up the event listener when the component unmounts
+    return () => {
+      i18n.off('languageChanged', handleLanguageChange);
+    };
+  }, [i18n]);
 
   return (
     <>
       <Head>
-        <title>{intro ? intro.title : 'Loading...'}</title>
+        <title>{intro ? intro.title : t('loading')}</title>
       </Head>
       <main>
         <IntroductionSection intro={intro} />

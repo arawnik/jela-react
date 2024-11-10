@@ -12,7 +12,7 @@ const EducationSection: React.FC<EducationSectionProps> = ({ educations }) => {
   return (
     <section className="container container-narrow text-center">
       <hr />
-      <h2 className="popout-font popout-text">{t('Education')}</h2>
+      <h2 className="popout-font popout-text">{t('education')}</h2>
       <hr />
       <div className="timeline">
         {educations.map((education, index) => (

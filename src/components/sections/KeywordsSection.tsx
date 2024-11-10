@@ -15,7 +15,7 @@ const KeywordsSection: React.FC<KeywordsSectionProps> = ({ programmingLanguages,
       <div className="row">
         {/* Programming Languages Section */}
         <div className="col-md-6">
-          <h2 className="popout-font popout-text h3">{t('Programming languages')}</h2>
+          <h2 className="popout-font popout-text h3">{t('programmingLanguages')}</h2>
           <div className="info-block">
             {programmingLanguages.map((language, index) => (
               <div key={index}>
@@ -41,7 +41,7 @@ const KeywordsSection: React.FC<KeywordsSectionProps> = ({ programmingLanguages,
 
         {/* Skills Section */}
         <div className="col-md-6">
-          <h2 className="popout-font popout-text h3">{t('Skills')}</h2>
+          <h2 className="popout-font popout-text h3">{t('skills')}</h2>
           <div className="info-block">
             {skills.map((skill, index) => (
               <span
@@ -54,7 +54,7 @@ const KeywordsSection: React.FC<KeywordsSectionProps> = ({ programmingLanguages,
           </div>
 
           {/* Technologies Section */}
-          <h2 className="popout-font popout-text h3">{t('Technologies')}</h2>
+          <h2 className="popout-font popout-text h3">{t('technologies')}</h2>
           <div className="info-block">
             {technologies.map((technology, index) => (
               <span

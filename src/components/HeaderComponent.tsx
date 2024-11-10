@@ -1,25 +1,27 @@
-import React from 'react';
+import { useRouter } from 'next/router';
 import { useTranslation } from 'next-i18next';
 import Link from 'next/link';
 import Image from 'next/image';
-import { Language } from '@/models/models';
+import { useEffect, useState } from 'react';
 
-interface HeaderComponentProps {
-  languages: Language[];
-  currentLang: string;
-}
-
-function Header({ languages, currentLang }: HeaderComponentProps) {
+const HeaderComponent: React.FC = () => {
   const { t } = useTranslation('common');
+  const router = useRouter();
 
-  function onThemeToggle(event: any): void {
-    throw new Error('Function not implemented.');
-  }
+   // Set language based on router.locale
+   const currentLang = router.locale || 'en';
 
-  function onlanguagechange(code: string): void {
-    console.log(`change to ${code}`);
-    throw new Error('Function not implemented.');
-  }
+   // Only show the opposite language switch
+   const oppositeLang = currentLang === 'en' ? 'fi' : 'en';
+
+  const onThemeToggle = (event: any): void => {
+    console.log('Function not implemented.');
+  };
+
+  const onLanguageChange = () => {
+    // Redirect to the same page with the opposite language
+    router.push(router.pathname, router.asPath, { locale: oppositeLang });
+  };
 
   return (
     <header>
@@ -34,7 +36,7 @@ function Header({ languages, currentLang }: HeaderComponentProps) {
                   className="nav-link text-main-nav"
                 >
                   <i className="bi bi-mid bi-fire d-block mb-0"></i>
-                  {t('Intro')}
+                  {t('intro')}
                 </Link>
               </li>
               <li>
@@ -43,7 +45,7 @@ function Header({ languages, currentLang }: HeaderComponentProps) {
                   className="nav-link text-main-nav"
                 >
                   <i className="bi bi-mid bi-building-gear d-block mb-0"></i>
-                  {t('Projects')}
+                  {t('projects')}
                 </Link>
               </li>
               <li>
@@ -52,20 +54,20 @@ function Header({ languages, currentLang }: HeaderComponentProps) {
                   className="nav-link text-main-nav"
                 >
                   <i className="bi bi-mid bi-envelope-paper d-block mb-0"></i>
-                  {t('Contact me')}
+                  {t('contactMe')}
                 </Link>
               </li>
             </ul>
 
-            {/* Theme Switch */}
             <ul className="nav col-12 col-md-auto justify-content-center my-md-0 text-center">
+              {/* Theme Switch */}
               <li>
                 <div className="d-flex">
                   <label
                     htmlFor="changeThemeSwitch"
                     className="form-check-label"
                     data-bs-toggle="tooltip"
-                    title={t('Light mode')}
+                    title={t('lightMode')}
                   >
                     <i className="bi bi-mid bi-lightbulb"></i>
                   </label>
@@ -77,14 +79,14 @@ function Header({ languages, currentLang }: HeaderComponentProps) {
                       role="switch"
                       id="changeThemeSwitch"
                       data-bs-toggle="tooltip"
-                      title={t('Switch theme')}
+                      title={t('switchTheme')}
                     />
                   </div>
                   <label
                     htmlFor="changeThemeSwitch"
                     className="form-check-label"
                     data-bs-toggle="tooltip"
-                    title={t('Dark mode')}
+                    title={t('darkMode')}
                   >
                     <i className="bi bi-mid bi-moon"></i>
                   </label>
@@ -93,29 +95,21 @@ function Header({ languages, currentLang }: HeaderComponentProps) {
 
               {/* Language Switch */}
               <li>
-                <div className="d-flex ms-2">
-                  {languages.map(
-                    ({ code, name }) =>
-                      code !== currentLang && (
-                        <a
-                          key={code}
-                          className="ms-2"
-                          data-bs-toggle="tooltip"
-                          title={t(name)}
-                          onClick={(e) => {
-                            e.preventDefault();
-                            onlanguagechange(code);
-                          }}
-                        >
-                          <Image
-                            src={`/img/${code}.svg`}
-                            height={26}
-                            width={32}
-                            alt={code}
-                          />
-                        </a>
-                      )
-                  )}
+                <div
+                  className="d-flex ms-2"
+                  data-bs-toggle="tooltip"
+                  title={t('oppositeLang')}
+                  onClick={() => {
+                    onLanguageChange();
+                  }}
+                  style={{ cursor: 'pointer' }}
+                >
+                  <Image
+                    src={`/img/${oppositeLang}.svg`}
+                    height={26}
+                    width={32}
+                    alt={oppositeLang}
+                  />
                 </div>
               </li>
             </ul>
@@ -128,7 +122,7 @@ function Header({ languages, currentLang }: HeaderComponentProps) {
                   className="nav-link text-secondary"
                   target="_blank"
                   rel="noopener noreferrer"
-                  title={t('LinkedIn profile')}
+                  title={t('linkedInProfile')}
                 >
                   <i className="bi bi-mid bi-linkedin d-block mb-0"></i>
                 </a>
@@ -139,7 +133,7 @@ function Header({ languages, currentLang }: HeaderComponentProps) {
                   className="nav-link text-secondary"
                   target="_blank"
                   rel="noopener noreferrer"
-                  title={t('Twitter profile')}
+                  title={t('twitterProfile')}
                 >
                   <i className="bi bi-mid bi-twitter d-block mb-0"></i>
                 </a>
@@ -150,7 +144,7 @@ function Header({ languages, currentLang }: HeaderComponentProps) {
                   className="nav-link text-secondary"
                   target="_blank"
                   rel="noopener noreferrer"
-                  title={t('Github profile')}
+                  title={t('githubProfile')}
                 >
                   <i className="bi bi-mid bi-github d-block mb-0"></i>
                 </a>
@@ -161,7 +155,7 @@ function Header({ languages, currentLang }: HeaderComponentProps) {
                   className="nav-link text-secondary"
                   target="_blank"
                   rel="noopener noreferrer"
-                  title={t('Downloadable oldschool CV Pdf')}
+                  title={t('downloadableCV')}
                 >
                   <i className="bi bi-mid bi-file-earmark-pdf d-block mb-0"></i>
                 </a>
@@ -172,6 +166,6 @@ function Header({ languages, currentLang }: HeaderComponentProps) {
       </nav>
     </header>
   );
-}
+};
 
-export default Header;
+export default HeaderComponent;

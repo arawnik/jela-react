@@ -1,0 +1,21 @@
+{
+  "education": "Koulutus",
+  "experience": "Kokemus",
+  "keywords": "Avainsanat",
+  "skills": "Osaaminen",
+  "technologies": "Teknologiat",
+  "intro": "Esittely",
+  "projects": "Projektit",
+  "contactMe": "Ota yhteyttä",
+  "admin": "Hallinta",
+  "lightMode": "Vaalea teema",
+  "darkMode": "Tumma teema",
+  "switchTheme": "Vaihda teemaa",
+  "linkedInProfile": "LinkedIn profiili",
+  "twitterProfile": "Twitter profiili",
+  "githubProfile": "Github profiili",
+  "downloadableCV": "Ladattava CV Pdf",
+  "oppositeLang": "In English",
+  "programmingLanguages": "Ohjelmointikielet",
+  "loading": "Ladataan ..."
+}

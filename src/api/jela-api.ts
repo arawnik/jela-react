@@ -1,5 +1,6 @@
 import { ContactForm } from '@/models/contact-form';
 import { Education, Experience, Introduction, Keyword, KeywordType } from '@/models/cover-models';
+import { i18n } from 'next-i18next';
 
 const API_BASE_URL = 'http://localhost:8083/api';
 /*
@@ -41,7 +42,15 @@ export class JelaApi {
 export class JelaApi {
   // Helper function to handle fetch requests and errors
   private static async fetchJson<T>(url: string): Promise<T> {
-    const response = await fetch(url);
+    // Get the current language from i18n or default to 'en'
+    const currentLanguage = i18n?.language || 'en';
+
+    // Include the Accept-Language header in the request
+    const response = await fetch(url, {
+      headers: {
+        'Accept-Language': currentLanguage,
+      },
+    });
     if (!response.ok) {
       throw new Error(`Failed to fetch ${url}`);
     }

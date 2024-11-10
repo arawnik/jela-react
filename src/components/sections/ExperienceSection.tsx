@@ -23,7 +23,7 @@ const ExperienceSection: React.FC<ExperienceSectionProps> = ({ experiences }) =>
   return (
     <section className="container container-narrow text-center">
       <hr />
-      <h2 className="popout-font popout-text">{t('Experience')}</h2>
+      <h2 className="popout-font popout-text">{t('experience')}</h2>
       <hr />
       <div className="timeline">
         {experiences.map((experience, index) => (
@@ -51,7 +51,7 @@ const ExperienceSection: React.FC<ExperienceSectionProps> = ({ experiences }) =>
                   onClick={() => toggleCollapse(index)}
                   style={{ cursor: 'pointer' }}
                 >
-                  {t('Keywords')}
+                  {t('keywords')}
                   <span className="ms-2">
                     {isCollapsed[index] ? (
                       <i className="bi bi-chevron-compact-down"></i>
