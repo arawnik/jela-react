@@ -2,50 +2,13 @@ import { ContactForm } from '@/models/contact-form';
 import { Education, Experience, Introduction, Keyword, KeywordType } from '@/models/cover-models';
 import { i18n } from 'next-i18next';
 
-const API_BASE_URL = 'http://localhost:8083/api';
-/*
-export class JelaApi {
-  // Return static frontpage data
-  static async getFrontpageData(): Promise<CoverInfo> {
-    return {
-      title: 'John Doe - Software Developer',
-      description: 'Building web applications with React, Django, and TypeScript',
-      introduction: 'Intro Building web applications with React, Django, and TypeScript',
-    };
-  }
-
-  // Return static projects data
-  static async getProjects(): Promise<Project[]> {
-    return [
-      {
-        id: 1,
-        name: 'Portfolio Website',
-        description: 'A personal portfolio website built with React and Django.',
-        url: 'https://example.com/portfolio',
-      },
-      {
-        id: 2,
-        name: 'E-Commerce Platform',
-        description: 'A full-stack e-commerce platform with user authentication and payment integration.',
-        url: 'https://example.com/ecommerce',
-      },
-    ];
-  }
-
-  // Simulate form submission
-  static async submitContactForm(formData: ContactForm): Promise<void> {
-    console.log('Mock contact form submitted:', formData);
-    // Here you can simulate a success response, no need for an actual HTTP request
-  }
-}*/
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || '';
 
 export class JelaApi {
-  // Helper function to handle fetch requests and errors
+  // Helper function to handle GET requests with language header
   private static async fetchJson<T>(url: string): Promise<T> {
-    // Get the current language from i18n or default to 'en'
     const currentLanguage = i18n?.language || 'en';
-
-    // Include the Accept-Language header in the request
+    
     const response = await fetch(url, {
       headers: {
         'Accept-Language': currentLanguage,
@@ -53,6 +16,31 @@ export class JelaApi {
     });
     if (!response.ok) {
       throw new Error(`Failed to fetch ${url}`);
+    }
+    return response.json();
+  }
+
+  // Helper function to handle POST requests with language header
+  private static async fetchPostJson<T>(url: string, body: any): Promise<T> {
+    const currentLanguage = i18n?.language || 'en';
+
+    const response = await fetch(url, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept-Language': currentLanguage,
+      },
+      body: JSON.stringify(body),
+    });
+
+    if (!response.ok) {
+      const errorData = await response.json();
+  
+      if (errorData.errors) {
+        throw errorData.errors;
+      }
+  
+      throw { message: errorData.message || `Failed to post to ${url}` };
     }
     return response.json();
   }
@@ -77,8 +65,9 @@ export class JelaApi {
     return JelaApi.fetchJson<Keyword[]>(`${API_BASE_URL}/keywords/${type}/`);
   }
 
-  public static async submitContactForm(formData: ContactForm) {
-    throw new Error('Method not implemented.');
+  // Submit Contact Form
+  public static async submitContactForm(formData: ContactForm & { captchaToken: string }) {
+    return JelaApi.fetchPostJson(`${API_BASE_URL}/contact/`, formData);
   }
 
   public static async getProjects() {

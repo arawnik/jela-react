@@ -17,5 +17,9 @@
   "downloadableCV": "Ladattava CV Pdf",
   "oppositeLang": "In English",
   "programmingLanguages": "Ohjelmointikielet",
-  "loading": "Ladataan ..."
+  "loading": "Ladataan ...",
+  "yourName": "Nimesi",
+  "yourEmail": "Sähköpostiosoitteesi",
+  "yourSubject": "Aiheesi",
+  "yourMessage": "Viestisi"
 }

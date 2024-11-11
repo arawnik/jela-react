@@ -17,5 +17,9 @@
   "downloadableCV": "Downloadable oldschool CV Pdf",
   "oppositeLang": "Suomeksi",
   "programmingLanguages": "Programming languages",
-  "loading": "Loading ..."
+  "loading": "Loading ...",
+  "yourName": "Your Name",
+  "yourEmail": "Your Email",
+  "yourSubject": "Your Subject",
+  "yourMessage": "Your Message"
 }
