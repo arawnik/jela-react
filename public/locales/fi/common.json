@@ -1,4 +1,5 @@
 {
+  "loading": "Ladataan ...",
   "education": "Koulutus",
   "experience": "Kokemus",
   "keywords": "Avainsanat",
@@ -17,7 +18,8 @@
   "downloadableCV": "Ladattava CV Pdf",
   "oppositeLang": "In English",
   "programmingLanguages": "Ohjelmointikielet",
-  "loading": "Ladataan ...",
+  "checkItOut": "Käy katsomassa",
+  "reCaptchaMissing": "Osoitathan, ettet ole botti!",
   "yourName": "Nimesi",
   "yourEmail": "Sähköpostiosoitteesi",
   "yourSubject": "Aiheesi",

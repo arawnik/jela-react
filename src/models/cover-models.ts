@@ -40,6 +40,7 @@ export interface Keyword {
 }
 
 export interface Experience {
+  id: number;
   title: string;
   description: string;
   company: Company;

@@ -1,5 +1,6 @@
-import { ContactForm } from '@/models/contact-form';
+import { ContactForm } from '@/models/contact-models';
 import { Education, Experience, Introduction, Keyword, KeywordType } from '@/models/cover-models';
+import { Project } from '@/models/projects-models';
 import { i18n } from 'next-i18next';
 
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || '';
@@ -65,13 +66,14 @@ export class JelaApi {
     return JelaApi.fetchJson<Keyword[]>(`${API_BASE_URL}/keywords/${type}/`);
   }
 
+  // Fetch Projects data
+  public static async getProjects() {
+    return JelaApi.fetchJson<Project[]>(`${API_BASE_URL}/projects/`);
+  }
+
   // Submit Contact Form
   public static async submitContactForm(formData: ContactForm & { captchaToken: string }) {
     return JelaApi.fetchPostJson(`${API_BASE_URL}/contact/`, formData);
-  }
-
-  public static async getProjects() {
-    throw new Error('Method not implemented.');
   }
 }
 

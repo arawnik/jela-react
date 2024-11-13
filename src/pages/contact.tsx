@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import Head from 'next/head';
-import { ContactForm } from '@/models/contact-form';
+import { ContactForm } from '@/models/contact-models';
 import { JelaApi } from '@/api/jela-api';
 import ReCAPTCHA from 'react-google-recaptcha';
 import { useRouter } from 'next/router';
@@ -31,7 +31,7 @@ const ContactPage = () => {
     e.preventDefault();
 
     if (!captchaToken) {
-      setErrors({ captcha: 'Please complete the reCAPTCHA verification.' });
+      setErrors({ captcha: t('reCaptchaMissing') });
       return;
     }
 

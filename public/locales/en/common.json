@@ -1,4 +1,5 @@
 {
+  "loading": "Loading ...",
   "education": "Education",
   "experience": "Experience",
   "keywords": "Keywords",
@@ -17,7 +18,8 @@
   "downloadableCV": "Downloadable oldschool CV Pdf",
   "oppositeLang": "Suomeksi",
   "programmingLanguages": "Programming languages",
-  "loading": "Loading ...",
+  "checkItOut": "Check it out",
+  "reCaptchaMissing": "Please, let me know that you're not a bot!",
   "yourName": "Your Name",
   "yourEmail": "Your Email",
   "yourSubject": "Your Subject",
