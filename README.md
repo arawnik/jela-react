@@ -18,8 +18,8 @@ This is a [React](https://react.dev) (with [Next.js](https://nextjs.org) framewo
 ## Using Docker
 
 0. Install [Docker](https://www.docker.com/) on your machine
-1. Build your container: `docker build -t nextjs-docker .`
-2. Run your container: `docker run -p 3000:3000 nextjs-docker`
+1. Build your container: `docker build -t jela-react .`
+2. Run your container: `docker run -p 3000:3000 jela-react`
 
 ### Developing
 

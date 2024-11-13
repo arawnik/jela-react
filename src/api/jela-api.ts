@@ -7,18 +7,24 @@ const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || '';
 
 export class JelaApi {
   // Helper function to handle GET requests with language header
-  private static async fetchJson<T>(url: string): Promise<T> {
+  private static async fetchJson<T>(url: string, defaultValue: T): Promise<T> {
     const currentLanguage = i18n?.language || 'en';
 
-    const response = await fetch(url, {
-      headers: {
-        'Accept-Language': currentLanguage,
-      },
-    });
-    if (!response.ok) {
-      throw new Error(`Failed to fetch ${url}`);
+    try {
+      const response = await fetch(url, {
+        headers: {
+          'Accept-Language': currentLanguage,
+        },
+      });
+      if (!response.ok) {
+        console.error(`Error fetching ${url}: ${response.statusText}`);
+        return defaultValue;
+      }
+      return response.json();
+    } catch (error) {
+      console.error(`Failed to fetch ${url}: `, error);
+      return defaultValue;
     }
-    return response.json();
   }
 
   // Helper function to handle POST requests with language header
@@ -48,27 +54,27 @@ export class JelaApi {
 
   // Fetch Introduction data
   public static async getIntroduction(): Promise<Introduction | null> {
-    return JelaApi.fetchJson<Introduction>(`${API_BASE_URL}/introduction/`);
+    return JelaApi.fetchJson<Introduction | null>(`${API_BASE_URL}/introduction/`, null);
   }
 
   // Fetch Experiences data
   public static async getExperiences(): Promise<Experience[]> {
-    return JelaApi.fetchJson<Experience[]>(`${API_BASE_URL}/experiences/`);
+    return JelaApi.fetchJson<Experience[]>(`${API_BASE_URL}/experiences/`, []);
   }
 
   // Fetch Educations data
   public static async getEducations(): Promise<Education[]> {
-    return JelaApi.fetchJson<Education[]>(`${API_BASE_URL}/educations/`);
+    return JelaApi.fetchJson<Education[]>(`${API_BASE_URL}/educations/`, []);
   }
 
   // Fetch Keywords by type
   public static async getKeywords(type: KeywordType): Promise<Keyword[]> {
-    return JelaApi.fetchJson<Keyword[]>(`${API_BASE_URL}/keywords/${type}/`);
+    return JelaApi.fetchJson<Keyword[]>(`${API_BASE_URL}/keywords/${type}/`, []);
   }
 
   // Fetch Projects data
   public static async getProjects() {
-    return JelaApi.fetchJson<Project[]>(`${API_BASE_URL}/projects/`);
+    return JelaApi.fetchJson<Project[]>(`${API_BASE_URL}/projects/`, []);
   }
 
   // Submit Contact Form
