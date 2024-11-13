@@ -8,7 +8,7 @@ export class JelaApi {
   // Helper function to handle GET requests with language header
   private static async fetchJson<T>(url: string): Promise<T> {
     const currentLanguage = i18n?.language || 'en';
-    
+
     const response = await fetch(url, {
       headers: {
         'Accept-Language': currentLanguage,
@@ -35,11 +35,11 @@ export class JelaApi {
 
     if (!response.ok) {
       const errorData = await response.json();
-  
+
       if (errorData.errors) {
         throw errorData.errors;
       }
-  
+
       throw { message: errorData.message || `Failed to post to ${url}` };
     }
     return response.json();

@@ -21,5 +21,11 @@
   "yourName": "Nimesi",
   "yourEmail": "Sähköpostiosoitteesi",
   "yourSubject": "Aiheesi",
-  "yourMessage": "Viestisi"
+  "yourMessage": "Viestisi",
+  "name": "Nimi",
+  "email": "Sähköpostiosoite",
+  "subject": "Aihe",
+  "message": "Viesti",
+  "thankYou": "Kiitokset!",
+  "thankYouMessage": "Kiitokset viestistäsi. Olen yhteydessä asiasi tiimoilta mahdollisimman pikaisesti."
 }

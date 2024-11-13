@@ -1,26 +1,12 @@
-import { useRouter } from 'next/router';
-import { useTranslation } from 'next-i18next';
 import Link from 'next/link';
 import Image from 'next/image';
-import { useEffect, useState } from 'react';
+import { useAppContext } from '@/app-context';
 
 const HeaderComponent: React.FC = () => {
-  const { t } = useTranslation('common');
-  const router = useRouter();
-
-   // Set language based on router.locale
-   const currentLang = router.locale || 'en';
-
-   // Only show the opposite language switch
-   const oppositeLang = currentLang === 'en' ? 'fi' : 'en';
+  const { t, i18n, setLanguage, oppositeLanguage } = useAppContext();
 
   const onThemeToggle = (event: any): void => {
     console.log('Function not implemented.');
-  };
-
-  const onLanguageChange = () => {
-    // Redirect to the same page with the opposite language
-    router.push(router.pathname, router.asPath, { locale: oppositeLang });
   };
 
   return (
@@ -100,15 +86,15 @@ const HeaderComponent: React.FC = () => {
                   data-bs-toggle="tooltip"
                   title={t('oppositeLang')}
                   onClick={() => {
-                    onLanguageChange();
+                    setLanguage(oppositeLanguage);
                   }}
                   style={{ cursor: 'pointer' }}
                 >
                   <Image
-                    src={`/img/${oppositeLang}.svg`}
+                    src={`/img/${oppositeLanguage}.svg`}
                     height={26}
                     width={32}
-                    alt={oppositeLang}
+                    alt={oppositeLanguage}
                   />
                 </div>
               </li>

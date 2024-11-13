@@ -3,18 +3,21 @@ import Head from 'next/head';
 import { ContactForm } from '@/models/contact-form';
 import { JelaApi } from '@/api/jela-api';
 import ReCAPTCHA from 'react-google-recaptcha';
+import { useRouter } from 'next/router';
+import Script from 'next/script';
 import { GetStaticProps } from 'next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
-import { useTranslation } from 'next-i18next';
+import { useAppContext } from '@/app-context';
 
 export const getStaticProps: GetStaticProps = async ({ locale }) => ({
   props: {
-    ...(await serverSideTranslations(locale || 'en', ["common"])),
+    ...(await serverSideTranslations(locale || 'en', ['common'])),
   },
 });
 
 const ContactPage = () => {
-  const { t } = useTranslation('common');
+  const { t, i18n } = useAppContext();
+  const router = useRouter();
   const [formData, setFormData] = useState<ContactForm>({
     name: '',
     email: '',
@@ -28,14 +31,15 @@ const ContactPage = () => {
     e.preventDefault();
 
     if (!captchaToken) {
-      setErrors({ captcha: "Please complete the reCAPTCHA verification." });
+      setErrors({ captcha: 'Please complete the reCAPTCHA verification.' });
       return;
     }
 
     try {
       await JelaApi.submitContactForm({ ...formData, captchaToken });
-      setFormData({ name: '', email: '', subject: '', message: '' }); // Clear form
+      setFormData({ name: '', email: '', subject: '', message: '' });
       setErrors({});
+      router.push('/thank-you');
     } catch (error: any) {
       setErrors(error);
     }
@@ -55,63 +59,90 @@ const ContactPage = () => {
     <>
       <Head>
         <title>{t('contactMe')}</title>
-        <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+        <Script
+          src="https://www.google.com/recaptcha/api.js"
+          async
+          defer
+        />
       </Head>
       <main className="container my-5">
         <h1 className="popout-font mb-3">{t('contactMe')}</h1>
         <hr />
-        <form onSubmit={handleSubmit} id="contact-form">
+        <form
+          onSubmit={handleSubmit}
+          id="contact-form"
+        >
           {/* Name Field */}
           <div className="form-group mb-3">
-            <label htmlFor="name" className="form-label">{t('yourName')}</label>
+            <label
+              htmlFor="name"
+              className="form-label"
+            >
+              {t('yourName')}
+            </label>
             <input
               type="text"
               id="name"
               className={`form-control ${errors.name ? 'is-invalid' : ''}`}
               value={formData.name}
               onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-              placeholder="Name"
+              placeholder={t('name')}
             />
             {errors.name && <div className="invalid-feedback">{errors.name}</div>}
           </div>
 
           {/* Email Field */}
           <div className="form-group mb-3">
-            <label htmlFor="email" className="form-label">{t('yourEmail')}</label>
+            <label
+              htmlFor="email"
+              className="form-label"
+            >
+              {t('yourEmail')}
+            </label>
             <input
               type="email"
               id="email"
               className={`form-control ${errors.email ? 'is-invalid' : ''}`}
               value={formData.email}
               onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-              placeholder="Email"
+              placeholder={t('email')}
             />
             {errors.email && <div className="invalid-feedback">{errors.email}</div>}
           </div>
 
           {/* Subject Field */}
           <div className="form-group mb-3">
-            <label htmlFor="subject" className="form-label">{t('yourSubject')}</label>
+            <label
+              htmlFor="subject"
+              className="form-label"
+            >
+              {t('yourSubject')}
+            </label>
             <input
               type="text"
               id="subject"
               className={`form-control ${errors.subject ? 'is-invalid' : ''}`}
               value={formData.subject}
               onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
-              placeholder="Subject"
+              placeholder={t('subject')}
             />
             {errors.subject && <div className="invalid-feedback">{errors.subject}</div>}
           </div>
 
           {/* Message Field */}
           <div className="form-group mb-3">
-            <label htmlFor="message" className="form-label">{t('yourMessage')}</label>
+            <label
+              htmlFor="message"
+              className="form-label"
+            >
+              {t('yourMessage')}
+            </label>
             <textarea
               id="message"
               className={`form-control ${errors.message ? 'is-invalid' : ''}`}
               value={formData.message}
               onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-              placeholder="Message"
+              placeholder={t('message')}
             />
             {errors.message && <div className="invalid-feedback">{errors.message}</div>}
           </div>
@@ -126,15 +157,23 @@ const ContactPage = () => {
             </div>
             {errors.captcha && (
               <div className="col-md-6 mt-3">
-                <div className="alert alert-danger" role="alert">
-                {errors.captcha}
+                <div
+                  className="alert alert-danger"
+                  role="alert"
+                >
+                  {errors.captcha}
+                </div>
               </div>
-            </div>
             )}
           </div>
 
           {/* Submit Button */}
-          <button type="submit" className="btn btn-primary btn-block">Send</button>
+          <button
+            type="submit"
+            className="btn btn-primary btn-block"
+          >
+            Send
+          </button>
         </form>
       </main>
     </>

@@ -8,16 +8,16 @@ import EducationSection from '@/components/sections/EducationSection';
 import KeywordsSection from '@/components/sections/KeywordsSection';
 import { GetStaticProps } from 'next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
-import { useTranslation } from 'next-i18next';
+import { useAppContext } from '@/app-context';
 
 export const getStaticProps: GetStaticProps = async ({ locale }) => ({
   props: {
-    ...(await serverSideTranslations(locale || 'en', ["common"])),
+    ...(await serverSideTranslations(locale || 'en', ['common'])),
   },
 });
 
 const CoverPage = () => {
-  const { i18n, t } = useTranslation('common');
+  const { t, i18n } = useAppContext();
   const [intro, setIntro] = useState<Introduction | null>(null);
   const [experiences, setExperiences] = useState<Experience[]>([]);
   const [educations, setEducations] = useState<Education[]>([]);
@@ -48,21 +48,9 @@ const CoverPage = () => {
     }
   };
 
-  // Fetch data initially and on language change
   useEffect(() => {
     fetchData();
-
-    const handleLanguageChange = () => {
-      fetchData();
-    };
-
-    i18n.on('languageChanged', handleLanguageChange);
-
-    // Clean up the event listener when the component unmounts
-    return () => {
-      i18n.off('languageChanged', handleLanguageChange);
-    };
-  }, [i18n]);
+  }, [i18n?.language]);
 
   return (
     <>

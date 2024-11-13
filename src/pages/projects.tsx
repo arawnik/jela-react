@@ -2,12 +2,15 @@ import { JelaApi } from '@/api/jela-api';
 import { Project } from '@/models/project';
 import { GetServerSideProps } from 'next';
 import Head from 'next/head';
+import { useAppContext } from '@/app-context';
 
 interface ProjectsPageProps {
   projects: Project[];
 }
 
 const ProjectsPage = ({ projects }: ProjectsPageProps) => {
+  const { t } = useAppContext();
+
   return (
     <>
       <Head>
@@ -36,6 +39,7 @@ const ProjectsPage = ({ projects }: ProjectsPageProps) => {
 };
 
 export const getServerSideProps: GetServerSideProps = async () => {
+  const { i18n } = useAppContext();
   const projects = await JelaApi.getProjects();
 
   return {

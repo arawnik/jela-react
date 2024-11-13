@@ -21,5 +21,11 @@
   "yourName": "Your Name",
   "yourEmail": "Your Email",
   "yourSubject": "Your Subject",
-  "yourMessage": "Your Message"
+  "yourMessage": "Your Message",
+  "name": "Name",
+  "email": "Email",
+  "subject": "Subject",
+  "message": "Message",
+  "thankYou": "Thank you!",
+  "thankYouMessage": "Thank you for your message. I will be in contact with you as soon as possible."
 }
