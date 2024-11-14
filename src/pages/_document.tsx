@@ -8,11 +8,7 @@ class MyDocument extends Document {
 
   render() {
     return (
-      <Html
-        lang="en"
-        className="h-100"
-        data-bs-theme="dark"
-      >
+      <Html lang="en" className="h-100" data-bs-theme="dark">
         <Head>
           {/* External Stylesheets */}
           <link
@@ -26,6 +22,17 @@ class MyDocument extends Document {
           <link
             rel="stylesheet"
             href="http://127.0.0.1:8083/static/site.min.css"
+          />
+          {/* set initial clientside to avoid flashing default theme */}
+          <script
+            dangerouslySetInnerHTML={{
+              __html: `
+                (function() {
+                  const theme = localStorage.getItem('theme') || 'dark';
+                  document.documentElement.setAttribute('data-bs-theme', theme);
+                })();
+              `,
+            }}
           />
         </Head>
         <body className="d-flex flex-column h-100 flex">

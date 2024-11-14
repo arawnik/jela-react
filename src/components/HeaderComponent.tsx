@@ -1,9 +1,13 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { useAppContext } from '@/app-context';
+import { useRouter } from 'next/router';
 
 const HeaderComponent: React.FC = () => {
-  const { t, i18n, setLanguage, oppositeLanguage } = useAppContext();
+  const { t, setLanguage, oppositeLanguage, toggleTheme, theme } = useAppContext();
+  const router = useRouter();
+
+  const navLinkClass = (path: string) => router.pathname === path ? 'active' : '';
 
   const onThemeToggle = (event: any): void => {
     console.log('Function not implemented.');
@@ -17,28 +21,19 @@ const HeaderComponent: React.FC = () => {
             {/* Navigation Links */}
             <ul className="nav col-12 col-md-auto justify-content-center my-md-0 text-center text-small">
               <li>
-                <Link
-                  href="/"
-                  className="nav-link text-main-nav"
-                >
+                <Link href="/" className={`nav-link text-main-nav ${navLinkClass('/')}`}>
                   <i className="bi bi-mid bi-fire d-block mb-0"></i>
                   {t('intro')}
                 </Link>
               </li>
               <li>
-                <Link
-                  href="/projects"
-                  className="nav-link text-main-nav"
-                >
+                <Link href="/projects" className={`nav-link text-main-nav ${navLinkClass('/projects')}`}>
                   <i className="bi bi-mid bi-building-gear d-block mb-0"></i>
                   {t('projects')}
                 </Link>
               </li>
               <li>
-                <Link
-                  href="/contact"
-                  className="nav-link text-main-nav"
-                >
+                <Link href="/contact" className={`nav-link text-main-nav ${navLinkClass('/contact')}`}>
                   <i className="bi bi-mid bi-envelope-paper d-block mb-0"></i>
                   {t('contactMe')}
                 </Link>
@@ -60,10 +55,11 @@ const HeaderComponent: React.FC = () => {
                   <div className="form-switch form-check ms-2">
                     <input
                       className="form-check-input"
-                      onClick={onThemeToggle}
+                      onChange={toggleTheme}
                       type="checkbox"
                       role="switch"
                       id="changeThemeSwitch"
+                      checked={theme === 'dark'}
                       data-bs-toggle="tooltip"
                       title={t('switchTheme')}
                     />
