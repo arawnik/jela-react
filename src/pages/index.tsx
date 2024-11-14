@@ -19,11 +19,11 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => ({
 const CoverPage = () => {
   const { t, i18n } = useAppContext();
   const [intro, setIntro] = useState<Introduction | null>(null);
-  const [experiences, setExperiences] = useState<Experience[]>([]);
-  const [educations, setEducations] = useState<Education[]>([]);
-  const [skills, setSkills] = useState<Keyword[]>([]);
-  const [technologies, setTechnologies] = useState<Keyword[]>([]);
-  const [programmingLanguages, setProgrammingLanguages] = useState<Keyword[]>([]);
+  const [experiences, setExperiences] = useState<Experience[] | null>(null);
+  const [educations, setEducations] = useState<Education[] | null>(null);
+  const [skills, setSkills] = useState<Keyword[] | null>(null);
+  const [technologies, setTechnologies] = useState<Keyword[] | null>(null);
+  const [programmingLanguages, setProgrammingLanguages] = useState<Keyword[] | null>(null);
 
   // Function to fetch all data from the backend
   const fetchData = async () => {

@@ -2,9 +2,9 @@ import { Keyword } from '@/models/cover-models';
 import { useTranslation } from 'next-i18next';
 
 interface KeywordsSectionProps {
-  skills: Keyword[];
-  technologies: Keyword[];
-  programmingLanguages: Keyword[];
+  skills: Keyword[] | null;
+  technologies: Keyword[] | null;
+  programmingLanguages: Keyword[] | null;
 }
 
 const KeywordsSection: React.FC<KeywordsSectionProps> = ({ programmingLanguages, skills, technologies }) => {
@@ -17,25 +17,49 @@ const KeywordsSection: React.FC<KeywordsSectionProps> = ({ programmingLanguages,
         <div className="col-md-6">
           <h2 className="popout-font popout-text h3">{t('programmingLanguages')}</h2>
           <div className="info-block">
-            {programmingLanguages.map((language, index) => (
-              <div key={index}>
-                <p>{language.name}</p>
-                <div className="progress info-progress position-relative">
-                  <div
-                    className="progress-bar progress-bar-striped"
-                    role="progressbar"
-                    style={{ width: `${language.proficiency?.scale || 0}%` }}
-                    aria-label={language.proficiency?.name}
-                    aria-valuenow={language.proficiency?.scale || 0}
-                    aria-valuemin={0}
-                    aria-valuemax={100}
-                  ></div>
-                  <div className="align-middle justify-content-center d-flex position-absolute w-100 progress-text">
-                    {language.proficiency?.name}
+            {programmingLanguages ? (
+              programmingLanguages.map((language, index) => (
+                <div key={index}>
+                  <p>{language.name}</p>
+                  <div className="progress info-progress position-relative">
+                    <div
+                      className="progress-bar progress-bar-striped"
+                      role="progressbar"
+                      style={{ width: `${language.proficiency?.scale || 0}%` }}
+                      aria-label={language.proficiency?.name}
+                      aria-valuenow={language.proficiency?.scale || 0}
+                      aria-valuemin={0}
+                      aria-valuemax={100}
+                    ></div>
+                    <div className="align-middle justify-content-center d-flex position-absolute w-100 progress-text">
+                      {language.proficiency?.name}
+                    </div>
                   </div>
                 </div>
-              </div>
-            ))}
+              ))
+            ) : (
+              <>
+                {/* Placeholder for 4 programming languages */}
+                {[...Array(3)].map((_, i) => (
+                  <div
+                    className="mb-3"
+                    key={i}
+                  >
+                    <p className="placeholder col-4"></p>
+                    <div className="progress info-progress position-relative">
+                      <div
+                        className="progress-bar progress-bar-striped"
+                        role="progressbar"
+                        style={{ width: '100%' }}
+                        aria-valuemin={0}
+                        aria-valuemax={100}
+                      ></div>
+                      <div className="align-middle justify-content-center d-flex position-absolute w-100 progress-text placeholder col-4"></div>
+                    </div>
+                  </div>
+                ))}
+              </>
+            )}
           </div>
         </div>
 
@@ -43,27 +67,55 @@ const KeywordsSection: React.FC<KeywordsSectionProps> = ({ programmingLanguages,
         <div className="col-md-6">
           <h2 className="popout-font popout-text h3">{t('skills')}</h2>
           <div className="info-block">
-            {skills.map((skill, index) => (
-              <span
-                key={index}
-                className="badge list-badge"
-              >
-                {skill.name}
-              </span>
-            ))}
+            {skills ? (
+              skills.map((skill, index) => (
+                <span
+                  key={index}
+                  className="badge list-badge"
+                >
+                  {skill.name}
+                </span>
+              ))
+            ) : (
+              <>
+                {/* Placeholder for 10 skills */}
+                {[...Array(10)].map((_, i) => (
+                  <span
+                    key={i}
+                    className="badge list-badge placeholder col-2 mx-1"
+                  >
+                    &nbsp;
+                  </span>
+                ))}
+              </>
+            )}
           </div>
 
           {/* Technologies Section */}
           <h2 className="popout-font popout-text h3">{t('technologies')}</h2>
           <div className="info-block">
-            {technologies.map((technology, index) => (
-              <span
-                key={index}
-                className="badge list-badge"
-              >
-                {technology.name}
-              </span>
-            ))}
+            {technologies ? (
+              technologies.map((technology, index) => (
+                <span
+                  key={index}
+                  className="badge list-badge"
+                >
+                  {technology.name}
+                </span>
+              ))
+            ) : (
+              <>
+                {/* Placeholder for 10 technologies */}
+                {[...Array(10)].map((_, i) => (
+                  <span
+                    key={i}
+                    className="badge list-badge placeholder col-2 mx-1"
+                  >
+                    &nbsp;
+                  </span>
+                ))}
+              </>
+            )}
           </div>
         </div>
       </div>
