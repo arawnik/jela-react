@@ -38,8 +38,8 @@ const KeywordsSection: React.FC<KeywordsSectionProps> = ({ programmingLanguages,
                 </div>
               ))
             ) : (
+              // Placeholders
               <>
-                {/* Placeholder for 4 programming languages */}
                 {[...Array(3)].map((_, i) => (
                   <div
                     className="mb-3"
@@ -77,8 +77,8 @@ const KeywordsSection: React.FC<KeywordsSectionProps> = ({ programmingLanguages,
                 </span>
               ))
             ) : (
+              // Placeholders
               <>
-                {/* Placeholder for 10 skills */}
                 {[...Array(10)].map((_, i) => (
                   <span
                     key={i}
@@ -104,8 +104,8 @@ const KeywordsSection: React.FC<KeywordsSectionProps> = ({ programmingLanguages,
                 </span>
               ))
             ) : (
+              // Placeholders
               <>
-                {/* Placeholder for 10 technologies */}
                 {[...Array(10)].map((_, i) => (
                   <span
                     key={i}

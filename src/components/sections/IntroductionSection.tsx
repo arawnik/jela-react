@@ -52,22 +52,15 @@ const IntroductionSection: React.FC<IntroductionSectionProps> = ({ intro }) => (
               ></div>
             </div>
           </div>
-          {/* Placeholder for Text Content */}
           <div className="col-md-6 col-lg-7 p-3 mt-md-3 align-self-md-center">
-            {/* Placeholder for Name */}
             <h1 className="easy-font display-4 mb-0">
               <span className="placeholder col-6"></span>
             </h1>
-
-            {/* Placeholder for Title */}
             <p className="popout-font header-subinfo">
               <span className="placeholder col-2 mb-2"></span>
               <span className="placeholder col-2 mb-2"></span>
             </p>
-
-            {/* Placeholder for Main Content Text */}
             <div className="content-placeholder">
-              {/* Simulate multiple lines of text for the paragraph structure */}
               <p className="mb-2">
                 <span className="placeholder col-10 mb-2"></span>
                 <span className="placeholder col-8 mb-2"></span>
@@ -83,8 +76,6 @@ const IntroductionSection: React.FC<IntroductionSectionProps> = ({ intro }) => (
                 <span className="placeholder col-6 mb-2"></span>
               </p>
             </div>
-
-            {/* Placeholder for Tagline */}
             <p className="lead">
               <span className="placeholder col-8"></span>
             </p>

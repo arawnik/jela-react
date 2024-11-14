@@ -17,50 +17,50 @@ const EducationSection: React.FC<EducationSectionProps> = ({ educations }) => {
       <div className="timeline">
         {educations
           ? educations.map((education, index) => (
+            <div
+              key={index}
+              className="timeline-box row"
+            >
+              <div className="timeline-left col-md-6">
+                <p className="h4">
+                  {getYear(education.startDate)} - {getYear(education.endDate)}
+                </p>
+              </div>
+              <div className="timeline-right col-md-6">
+                <p className="h5">
+                  {education.title}
+                  {education.institution && education.institution.department
+                    ? `, ${education.institution.department}`
+                    : ''}
+                </p>
+                <p>{education.institution.name}</p>
+              </div>
+            </div>
+          ))
+          : // Placeholders
+          Array(2)
+            .fill(null)
+            .map((_, index) => (
               <div
                 key={index}
                 className="timeline-box row"
               >
                 <div className="timeline-left col-md-6">
                   <p className="h4">
-                    {getYear(education.startDate)} - {getYear(education.endDate)}
+                    <span className="placeholder col-4"></span>
                   </p>
                 </div>
                 <div className="timeline-right col-md-6">
                   <p className="h5">
-                    {education.title}
-                    {education.institution && education.institution.department
-                      ? `, ${education.institution.department}`
-                      : ''}
+                    <span className="placeholder col-6"></span>
+                    <span className="placeholder col-3 ms-1"></span>
                   </p>
-                  <p>{education.institution.name}</p>
+                  <p>
+                    <span className="placeholder col-6"></span>
+                  </p>
                 </div>
               </div>
-            ))
-          : // Placeholder content for two education entries
-            Array(2)
-              .fill(null)
-              .map((_, index) => (
-                <div
-                  key={index}
-                  className="timeline-box row"
-                >
-                  <div className="timeline-left col-md-6">
-                    <p className="h4">
-                      <span className="placeholder col-4"></span>
-                    </p>
-                  </div>
-                  <div className="timeline-right col-md-6">
-                    <p className="h5">
-                      <span className="placeholder col-6"></span>
-                      <span className="placeholder col-3 ms-1"></span>
-                    </p>
-                    <p>
-                      <span className="placeholder col-6"></span>
-                    </p>
-                  </div>
-                </div>
-              ))}
+            ))}
       </div>
     </section>
   );

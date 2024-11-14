@@ -16,7 +16,7 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => ({
 });
 
 const ContactPage = () => {
-  const { t, i18n } = useAppContext();
+  const { t } = useAppContext();
   const router = useRouter();
   const [formData, setFormData] = useState<ContactForm>({
     name: '',
