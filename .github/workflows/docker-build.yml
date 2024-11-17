@@ -7,7 +7,7 @@ permissions:
 on:
   push:
     branches:
-      - main  # Trigger on pushes to the 'main' branch (modify as needed)
+      - main  # Trigger on pushes to the 'main' branch
   workflow_dispatch:  # Allow manual trigger with inputs
     inputs:
       tag:
@@ -15,7 +15,7 @@ on:
         required: false
         default: 'latest'
       api-base-url:
-        description: 'Api base URL'
+        description: 'API base URL'
         required: false
         default: 'https://jerejunttila.fi/api'
       public-recaptcha-key:
@@ -32,10 +32,13 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v3
 
-    # Step 2: Set the Docker tag
-    - name: Set Docker tag
-      id: tag
-      run: echo "tag=${{ github.event.inputs.tag || 'latest' }}" >> $GITHUB_ENV
+    # Step 2: Set Docker tag and environment variables
+    - name: Set environment variables
+      id: env
+      run: |
+        echo "tag=${{ github.event.inputs.tag || 'latest' }}" >> $GITHUB_ENV
+        echo "api_base_url=${{ github.event.inputs.api-base-url }}" >> $GITHUB_ENV
+        echo "public_recaptcha_key=${{ github.event.inputs.public-recaptcha-key }}" >> $GITHUB_ENV
 
     # Step 3: Log in to GitHub Container Registry
     - name: Log in to GitHub Container Registry
@@ -45,10 +48,13 @@ jobs:
         username: ${{ github.actor }}
         password: ${{ secrets.GITHUB_TOKEN }}
 
-    # Step 4: Build and push Docker image to GitHub Container Registry
+    # Step 4: Build and push Docker image
     - name: Build and push Docker image
       uses: docker/build-push-action@v4
       with:
         context: .
         push: true
         tags: ghcr.io/arawnik/jela-react:${{ github.ref_name }}
+        build-args: |
+          NEXT_PUBLIC_API_BASE_URL=${{ github.event.inputs.api-base-url }}
+          NEXT_PUBLIC_RECAPTCHA_SITE_KEY=${{ github.event.inputs.public-recaptcha-key }}

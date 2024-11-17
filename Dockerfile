@@ -24,8 +24,13 @@ COPY . .
 # Uncomment the following line in case you want to disable telemetry during the build.
 ENV NEXT_TELEMETRY_DISABLED=1
 
+
+# Pass args as environment variables during build
 ARG NEXT_PUBLIC_API_BASE_URL
 ARG NEXT_PUBLIC_RECAPTCHA_SITE_KEY
+
+ENV NEXT_PUBLIC_API_BASE_URL=${NEXT_PUBLIC_API_BASE_URL}
+ENV NEXT_PUBLIC_RECAPTCHA_SITE_KEY=${NEXT_PUBLIC_RECAPTCHA_SITE_KEY}
 
 RUN \
   if [ -f package-lock.json ]; then npm run build; \
