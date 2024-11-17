@@ -39,4 +39,4 @@ jobs:
       with:
         context: .
         push: true
-        tags: ghcr.io/<your-username>/<repository-name>:${{ github.ref_name }}
+        tags: ghcr.io/arawnik/jela-react:${{ github.ref_name }}
