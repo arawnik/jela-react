@@ -14,6 +14,14 @@ on:
         description: 'Docker image tag (e.g., stable)'
         required: false
         default: 'latest'
+      api-base-url:
+        description: 'Api base URL'
+        required: false
+        default: 'https://jerejunttila.fi/api'
+      public-recaptcha-key:
+        description: 'Public recaptcha site key'
+        required: false
+        default: '6LctfJ0UAAAAAA6LWsCyDjF_a4xcQqZzVKeanAhd'
 
 jobs:
   build-and-push:

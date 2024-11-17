@@ -24,6 +24,9 @@ COPY . .
 # Uncomment the following line in case you want to disable telemetry during the build.
 ENV NEXT_TELEMETRY_DISABLED=1
 
+ARG NEXT_PUBLIC_API_BASE_URL
+ARG NEXT_PUBLIC_RECAPTCHA_SITE_KEY
+
 RUN \
   if [ -f package-lock.json ]; then npm run build; \
   else echo "Lockfile not found." && exit 1; \

@@ -1,7 +1,7 @@
 version: '3.4'
 services:
   app:
-    image: registry.gitlab.com/jerejunttila/jela-react:stable
+    image: ghcr.io/arawnik/jela-react:main
     ports:
       - 8085:3000
     environment:
