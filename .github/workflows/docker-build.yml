@@ -1,0 +1,42 @@
+name: Build and Push Docker Image
+
+on:
+  push:
+    branches:
+      - main  # Trigger on pushes to the 'main' branch (modify as needed)
+  workflow_dispatch:  # Allow manual trigger with inputs
+    inputs:
+      tag:
+        description: 'Docker image tag (e.g., stable)'
+        required: false
+        default: 'latest'
+
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
+
+    steps:
+    # Step 1: Checkout the repository
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    # Step 2: Set the Docker tag
+    - name: Set Docker tag
+      id: tag
+      run: echo "tag=${{ github.event.inputs.tag || 'latest' }}" >> $GITHUB_ENV
+
+    # Step 3: Log in to GitHub Container Registry
+    - name: Log in to GitHub Container Registry
+      uses: docker/login-action@v2
+      with:
+        registry: ghcr.io
+        username: ${{ github.actor }}
+        password: ${{ secrets.GITHUB_TOKEN }}
+
+    # Step 4: Build and push Docker image to GitHub Container Registry
+    - name: Build and push Docker image
+      uses: docker/build-push-action@v4
+      with:
+        context: .
+        push: true
+        tags: ghcr.io/<your-username>/<repository-name>:${{ github.ref_name }}
