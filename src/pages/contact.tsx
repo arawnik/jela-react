@@ -151,7 +151,7 @@ const ContactPage = () => {
           <div className="row mb-4">
             <div className="col-md-6">
               <ReCAPTCHA
-                sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY || '6LctfJ0UAAAAAA6LWsCyDjF_a4xcQqZzVKeanAhd'}
+                sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY || ''}
                 onChange={handleCaptchaChange}
               />
             </div>

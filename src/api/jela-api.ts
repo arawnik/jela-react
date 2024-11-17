@@ -3,7 +3,7 @@ import { Education, Experience, Introduction, Keyword, KeywordType } from '@/mod
 import { Project } from '@/models/projects-models';
 import { i18n } from 'next-i18next';
 
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || 'https://jerejunttila.fi/api';
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || '';
 
 export class JelaApi {
   // Helper function to handle GET requests with language header
