@@ -8,7 +8,11 @@ class MyDocument extends Document {
 
   render() {
     return (
-      <Html lang="en" className="h-100" data-bs-theme="dark">
+      <Html
+        lang="en"
+        className="h-100"
+        data-bs-theme="dark"
+      >
         <Head>
           {/* External Stylesheets */}
           <link

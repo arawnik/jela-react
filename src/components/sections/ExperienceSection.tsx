@@ -46,89 +46,89 @@ const ExperienceSection: React.FC<ExperienceSectionProps> = ({ experiences }) =>
       <div className="timeline">
         {experiences
           ? experiences.map((experience, index) => (
-            <div
-              key={experience.id}
-              className="timeline-box row"
-            >
-              <div className="timeline-left col-md-6">
-                <p className="h4">{formatEraText(experience.startDate, experience.endDate)}</p>
-                <p className="h5">
-                  {experience.title}
-                  {experience.company && experience.company.name ? `, ${experience.company.name}` : ''}
-                </p>
-              </div>
-              <div className="timeline-right col-md-6">
-                <p className="h4">{experience.company.name}</p>
-                <p>{experience.description}</p>
-                <fieldset className="collapsible">
-                  <legend
-                    onClick={() => toggleCollapse(experience.id)}
-                    style={{ cursor: 'pointer' }}
-                  >
-                    {t('keywords')}
-                    <span className="ms-2">
-                      {isCollapsed[experience.id] ? (
-                        <i className="bi bi-chevron-compact-down"></i>
-                      ) : (
-                        <i className="bi bi-chevron-compact-up"></i>
-                      )}
-                    </span>
-                  </legend>
-                  <div style={{ display: isCollapsed[experience.id] ? 'none' : 'block' }}>
-                    {experience.keywords.map((keyword, keywordIndex) => (
-                      <span
-                        key={keywordIndex}
-                        className="badge list-badge"
-                      >
-                        {keyword.name}
-                      </span>
-                    ))}
-                  </div>
-                </fieldset>
-              </div>
-            </div>
-          ))
-          : // Placeholders
-          Array(3)
-            .fill(null)
-            .map((_, index) => (
               <div
-                key={index}
+                key={experience.id}
                 className="timeline-box row"
               >
                 <div className="timeline-left col-md-6">
-                  <p className="h4">
-                    <span className="placeholder col-4"></span>
-                  </p>
+                  <p className="h4">{formatEraText(experience.startDate, experience.endDate)}</p>
                   <p className="h5">
-                    <span className="placeholder col-6"></span>
+                    {experience.title}
+                    {experience.company && experience.company.name ? `, ${experience.company.name}` : ''}
                   </p>
                 </div>
                 <div className="timeline-right col-md-6">
-                  <p className="h4">
-                    <span className="placeholder col-4"></span>
-                  </p>
-                  <p>
-                    <span className="placeholder col-10 mb-2"></span>
-                    <span className="placeholder col-8 mb-2"></span>
-                    <span className="placeholder col-9"></span>
-                  </p>
+                  <p className="h4">{experience.company.name}</p>
+                  <p>{experience.description}</p>
                   <fieldset className="collapsible">
-                    <legend style={{ cursor: 'pointer' }}>
+                    <legend
+                      onClick={() => toggleCollapse(experience.id)}
+                      style={{ cursor: 'pointer' }}
+                    >
                       {t('keywords')}
                       <span className="ms-2">
-                        <i className="bi bi-chevron-compact-down"></i>
+                        {isCollapsed[experience.id] ? (
+                          <i className="bi bi-chevron-compact-down"></i>
+                        ) : (
+                          <i className="bi bi-chevron-compact-up"></i>
+                        )}
                       </span>
                     </legend>
-                    <div style={{ display: COLLAPSE_STATE_DEFAULT ? 'none' : 'block' }}>
-                      <span className="badge list-badge placeholder col-2"></span>
-                      <span className="badge list-badge placeholder col-3 ms-1"></span>
-                      <span className="badge list-badge placeholder col-2 ms-1"></span>
+                    <div style={{ display: isCollapsed[experience.id] ? 'none' : 'block' }}>
+                      {experience.keywords.map((keyword, keywordIndex) => (
+                        <span
+                          key={keywordIndex}
+                          className="badge list-badge"
+                        >
+                          {keyword.name}
+                        </span>
+                      ))}
                     </div>
                   </fieldset>
                 </div>
               </div>
-            ))}
+            ))
+          : // Placeholders
+            Array(3)
+              .fill(null)
+              .map((_, index) => (
+                <div
+                  key={index}
+                  className="timeline-box row"
+                >
+                  <div className="timeline-left col-md-6">
+                    <p className="h4">
+                      <span className="placeholder col-4"></span>
+                    </p>
+                    <p className="h5">
+                      <span className="placeholder col-6"></span>
+                    </p>
+                  </div>
+                  <div className="timeline-right col-md-6">
+                    <p className="h4">
+                      <span className="placeholder col-4"></span>
+                    </p>
+                    <p>
+                      <span className="placeholder col-10 mb-2"></span>
+                      <span className="placeholder col-8 mb-2"></span>
+                      <span className="placeholder col-9"></span>
+                    </p>
+                    <fieldset className="collapsible">
+                      <legend style={{ cursor: 'pointer' }}>
+                        {t('keywords')}
+                        <span className="ms-2">
+                          <i className="bi bi-chevron-compact-down"></i>
+                        </span>
+                      </legend>
+                      <div style={{ display: COLLAPSE_STATE_DEFAULT ? 'none' : 'block' }}>
+                        <span className="badge list-badge placeholder col-2"></span>
+                        <span className="badge list-badge placeholder col-3 ms-1"></span>
+                        <span className="badge list-badge placeholder col-2 ms-1"></span>
+                      </div>
+                    </fieldset>
+                  </div>
+                </div>
+              ))}
       </div>
     </section>
   );

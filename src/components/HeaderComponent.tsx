@@ -7,7 +7,7 @@ const HeaderComponent: React.FC = () => {
   const { t, setLanguage, oppositeLanguage, toggleTheme, theme } = useAppContext();
   const router = useRouter();
 
-  const navLinkClass = (path: string) => router.pathname === path ? 'active' : '';
+  const navLinkClass = (path: string) => (router.pathname === path ? 'active' : '');
 
   const onThemeToggle = (event: any): void => {
     console.log('Function not implemented.');
@@ -21,19 +21,28 @@ const HeaderComponent: React.FC = () => {
             {/* Navigation Links */}
             <ul className="nav col-12 col-md-auto justify-content-center my-md-0 text-center text-small">
               <li>
-                <Link href="/" className={`nav-link text-secondary ${navLinkClass('/')}`}>
+                <Link
+                  href="/"
+                  className={`nav-link text-secondary ${navLinkClass('/')}`}
+                >
                   <i className="bi bi-mid bi-fire d-block mb-0"></i>
                   {t('intro')}
                 </Link>
               </li>
               <li>
-                <Link href="/projects" className={`nav-link text-secondary ${navLinkClass('/projects')}`}>
+                <Link
+                  href="/projects"
+                  className={`nav-link text-secondary ${navLinkClass('/projects')}`}
+                >
                   <i className="bi bi-mid bi-building-gear d-block mb-0"></i>
                   {t('projects')}
                 </Link>
               </li>
               <li>
-                <Link href="/contact" className={`nav-link text-secondary ${navLinkClass('/contact')}`}>
+                <Link
+                  href="/contact"
+                  className={`nav-link text-secondary ${navLinkClass('/contact')}`}
+                >
                   <i className="bi bi-mid bi-envelope-paper d-block mb-0"></i>
                   {t('contactMe')}
                 </Link>
