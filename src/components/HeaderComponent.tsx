@@ -133,7 +133,7 @@ const HeaderComponent: React.FC = () => {
               </li>
               <li>
                 <a
-                  href="/pdf/CV_JereJunttila.pdf"
+                  href="https://jerejunttila.fi/media/pdf/CV_JereJunttila.pdf"
                   className="nav-link text-secondary"
                   target="_blank"
                   rel="noopener noreferrer"
