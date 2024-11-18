@@ -21,7 +21,7 @@ class MyDocument extends Document {
           />
           <link
             rel="stylesheet"
-            href="http://127.0.0.1:8083/static/site.min.css"
+            href="https://jerejunttila.fi/static/site.min.css"
           />
           {/* set initial clientside to avoid flashing default theme */}
           <script

@@ -21,19 +21,19 @@ const HeaderComponent: React.FC = () => {
             {/* Navigation Links */}
             <ul className="nav col-12 col-md-auto justify-content-center my-md-0 text-center text-small">
               <li>
-                <Link href="/" className={`nav-link text-main-nav ${navLinkClass('/')}`}>
+                <Link href="/" className={`nav-link text-secondary ${navLinkClass('/')}`}>
                   <i className="bi bi-mid bi-fire d-block mb-0"></i>
                   {t('intro')}
                 </Link>
               </li>
               <li>
-                <Link href="/projects" className={`nav-link text-main-nav ${navLinkClass('/projects')}`}>
+                <Link href="/projects" className={`nav-link text-secondary ${navLinkClass('/projects')}`}>
                   <i className="bi bi-mid bi-building-gear d-block mb-0"></i>
                   {t('projects')}
                 </Link>
               </li>
               <li>
-                <Link href="/contact" className={`nav-link text-main-nav ${navLinkClass('/contact')}`}>
+                <Link href="/contact" className={`nav-link text-secondary ${navLinkClass('/contact')}`}>
                   <i className="bi bi-mid bi-envelope-paper d-block mb-0"></i>
                   {t('contactMe')}
                 </Link>
