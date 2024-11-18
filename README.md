@@ -12,8 +12,9 @@ This is a [React](https://react.dev) (with [Next.js](https://nextjs.org) framewo
 
 ## Testing locally
 
-1. Run the development server: `npm run dev`
-2. Open [http://localhost:3000](http://localhost:3000) with your browser
+1. Install dependencies: `npm install`
+2. Run the development server: `npm run dev`
+3. Open [http://localhost:3000](http://localhost:3000) with your browser
 
 ## Using Docker
 
