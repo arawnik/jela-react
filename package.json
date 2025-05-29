@@ -32,7 +32,7 @@
     "useTabs": false,
     "tabWidth": 2,
     "trailingComma": "es5",
-    "semi": true,
+    "semi": false,
     "singleQuote": true,
     "singleAttributePerLine": true,
     "bracketSpacing": true,

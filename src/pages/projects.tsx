@@ -1,34 +1,34 @@
-import { JelaApi } from '@/api/jela-api';
-import { Project } from '@/models/projects-models';
-import Head from 'next/head';
-import { useEffect, useState } from 'react';
+import { JelaApi } from '@/api/jela-api'
+import { Project } from '@/models/projects-models'
+import Head from 'next/head'
+import { useEffect, useState } from 'react'
 
-import { GetStaticProps } from 'next';
-import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
-import { useAppContext } from '@/app-context';
+import { GetStaticProps } from 'next'
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
+import { useAppContext } from '@/app-context'
 
 export const getStaticProps: GetStaticProps = async ({ locale }) => ({
   props: {
     ...(await serverSideTranslations(locale || 'en', ['common'])),
   },
-});
+})
 
 const ProjectsPage = () => {
-  const { t, i18n } = useAppContext();
-  const [projects, setProjects] = useState<Project[] | null>(null);
+  const { t, i18n } = useAppContext()
+  const [projects, setProjects] = useState<Project[] | null>(null)
 
   const fetchData = async () => {
     try {
-      const projectsData = await JelaApi.getProjects();
-      setProjects(projectsData);
+      const projectsData = await JelaApi.getProjects()
+      setProjects(projectsData)
     } catch (error) {
-      console.error('Failed to fetch data:', error);
+      console.error('Failed to fetch data:', error)
     }
-  };
+  }
 
   useEffect(() => {
-    fetchData();
-  }, [i18n?.language]);
+    fetchData()
+  }, [i18n?.language])
 
   return (
     <>
@@ -126,7 +126,7 @@ const ProjectsPage = () => {
         </div>
       </main>
     </>
-  );
-};
+  )
+}
 
-export default ProjectsPage;
+export default ProjectsPage

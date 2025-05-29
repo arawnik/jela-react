@@ -1,7 +1,7 @@
-import { Introduction } from '@/models/cover-models';
+import { Introduction } from '@/models/cover-models'
 
 interface IntroductionSectionProps {
-  intro: Introduction | null;
+  intro: Introduction | null
 }
 
 const IntroductionSection: React.FC<IntroductionSectionProps> = ({ intro }) => (
@@ -84,6 +84,6 @@ const IntroductionSection: React.FC<IntroductionSectionProps> = ({ intro }) => (
       )}
     </div>
   </section>
-);
+)
 
-export default IntroductionSection;
+export default IntroductionSection

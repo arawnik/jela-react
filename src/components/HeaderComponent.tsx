@@ -1,17 +1,17 @@
-import Link from 'next/link';
-import Image from 'next/image';
-import { useAppContext } from '@/app-context';
-import { useRouter } from 'next/router';
+import Link from 'next/link'
+import Image from 'next/image'
+import { useAppContext } from '@/app-context'
+import { useRouter } from 'next/router'
 
 const HeaderComponent: React.FC = () => {
-  const { t, setLanguage, oppositeLanguage, toggleTheme, theme } = useAppContext();
-  const router = useRouter();
+  const { t, setLanguage, oppositeLanguage, toggleTheme, theme } = useAppContext()
+  const router = useRouter()
 
-  const navLinkClass = (path: string) => (router.pathname === path ? 'active' : '');
+  const navLinkClass = (path: string) => (router.pathname === path ? 'active' : '')
 
   const onThemeToggle = (event: any): void => {
-    console.log('Function not implemented.');
-  };
+    console.log('Function not implemented.')
+  }
 
   return (
     <header>
@@ -91,7 +91,7 @@ const HeaderComponent: React.FC = () => {
                   data-bs-toggle="tooltip"
                   title={t('oppositeLang')}
                   onClick={() => {
-                    setLanguage(oppositeLanguage);
+                    setLanguage(oppositeLanguage)
                   }}
                   style={{ cursor: 'pointer' }}
                 >
@@ -156,7 +156,7 @@ const HeaderComponent: React.FC = () => {
         </div>
       </nav>
     </header>
-  );
-};
+  )
+}
 
-export default HeaderComponent;
+export default HeaderComponent
