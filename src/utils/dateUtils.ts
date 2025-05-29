@@ -1,4 +1,4 @@
-import { format } from 'date-fns';
+import { format } from 'date-fns'
 
 /**
  * Extracts the year from a given date.
@@ -7,8 +7,8 @@ import { format } from 'date-fns';
  * @returns {string} The year as a four-digit string.
  */
 export const getYear = (date: string | Date): string => {
-  return format(new Date(date), 'yyyy');
-};
+  return format(new Date(date), 'yyyy')
+}
 
 /**
  * Extracts the year and month from a given date in "MM/yyyy" or "MM-yyyy" format.
@@ -18,8 +18,8 @@ export const getYear = (date: string | Date): string => {
  * @returns {string} The year and month in the specified format.
  */
 export const getYearMonth = (date: string | Date, useHyphen: boolean = false): string => {
-  return format(new Date(date), useHyphen ? 'MM-yyyy' : 'MM/yyyy');
-};
+  return format(new Date(date), useHyphen ? 'MM-yyyy' : 'MM/yyyy')
+}
 
 /**
  * Generates a formatted date range string for a given start and end date.
@@ -35,8 +35,8 @@ export const formatEraText = (
   endDate: string | Date | null = null,
   useHyphen: boolean = false
 ): string => {
-  const startStr = startDate ? getYearMonth(startDate, useHyphen) : '';
-  const endStr = endDate ? getYearMonth(endDate, useHyphen) : 'Present';
+  const startStr = startDate ? getYearMonth(startDate, useHyphen) : ''
+  const endStr = endDate ? getYearMonth(endDate, useHyphen) : 'Present'
 
-  return `${startStr} - ${endStr}`;
-};
+  return `${startStr} - ${endStr}`
+}

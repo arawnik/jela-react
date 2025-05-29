@@ -1,13 +1,13 @@
-import { Education } from '@/models/cover-models';
-import { getYear } from 'date-fns';
-import { useTranslation } from 'next-i18next';
+import { Education } from '@/models/cover-models'
+import { getYear } from 'date-fns'
+import { useTranslation } from 'next-i18next'
 
 interface EducationSectionProps {
-  educations: Education[] | null;
+  educations: Education[] | null
 }
 
 const EducationSection: React.FC<EducationSectionProps> = ({ educations }) => {
-  const { t } = useTranslation('common');
+  const { t } = useTranslation('common')
 
   return (
     <section className="container container-narrow text-center">
@@ -63,7 +63,7 @@ const EducationSection: React.FC<EducationSectionProps> = ({ educations }) => {
               ))}
       </div>
     </section>
-  );
-};
+  )
+}
 
-export default EducationSection;
+export default EducationSection

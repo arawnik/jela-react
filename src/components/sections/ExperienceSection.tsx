@@ -1,42 +1,42 @@
-import React, { useState, useEffect } from 'react';
-import { Experience } from '@/models/cover-models';
-import { formatEraText } from '@/utils/dateUtils';
-import { useTranslation } from 'next-i18next';
+import React, { useState, useEffect } from 'react'
+import { Experience } from '@/models/cover-models'
+import { formatEraText } from '@/utils/dateUtils'
+import { useTranslation } from 'next-i18next'
 
 interface ExperienceSectionProps {
-  experiences: Experience[] | null;
+  experiences: Experience[] | null
 }
 
-const COLLAPSE_STATE_KEY = 'experience_collapsed_states';
-const COLLAPSE_STATE_DEFAULT = true;
+const COLLAPSE_STATE_KEY = 'experience_collapsed_states'
+const COLLAPSE_STATE_DEFAULT = true
 
 const ExperienceSection: React.FC<ExperienceSectionProps> = ({ experiences }) => {
-  const { t } = useTranslation('common');
-  const [isCollapsed, setIsCollapsed] = useState<{ [key: number]: boolean }>({});
+  const { t } = useTranslation('common')
+  const [isCollapsed, setIsCollapsed] = useState<{ [key: number]: boolean }>({})
 
   useEffect(() => {
-    const storedState = localStorage.getItem(COLLAPSE_STATE_KEY);
-    const initialState: { [key: number]: boolean } = storedState ? JSON.parse(storedState) : {};
+    const storedState = localStorage.getItem(COLLAPSE_STATE_KEY)
+    const initialState: { [key: number]: boolean } = storedState ? JSON.parse(storedState) : {}
 
     const collapseStateWithDefaults =
       experiences?.reduce(
         (accumulator, experience) => {
-          accumulator[experience.id] = initialState[experience.id] ?? COLLAPSE_STATE_DEFAULT;
-          return accumulator;
+          accumulator[experience.id] = initialState[experience.id] ?? COLLAPSE_STATE_DEFAULT
+          return accumulator
         },
         {} as { [key: number]: boolean }
-      ) ?? [];
+      ) ?? []
 
-    setIsCollapsed(collapseStateWithDefaults);
-  }, [experiences]);
+    setIsCollapsed(collapseStateWithDefaults)
+  }, [experiences])
 
   const toggleCollapse = (id: number) => {
     setIsCollapsed((prevState) => {
-      const newState = { ...prevState, [id]: !prevState[id] };
-      localStorage.setItem(COLLAPSE_STATE_KEY, JSON.stringify(newState));
-      return newState;
-    });
-  };
+      const newState = { ...prevState, [id]: !prevState[id] }
+      localStorage.setItem(COLLAPSE_STATE_KEY, JSON.stringify(newState))
+      return newState
+    })
+  }
 
   return (
     <section className="container container-narrow text-center">
@@ -131,7 +131,7 @@ const ExperienceSection: React.FC<ExperienceSectionProps> = ({ experiences }) =>
               ))}
       </div>
     </section>
-  );
-};
+  )
+}
 
-export default ExperienceSection;
+export default ExperienceSection

@@ -1,14 +1,14 @@
-import { Keyword } from '@/models/cover-models';
-import { useTranslation } from 'next-i18next';
+import { Keyword } from '@/models/cover-models'
+import { useTranslation } from 'next-i18next'
 
 interface KeywordsSectionProps {
-  skills: Keyword[] | null;
-  technologies: Keyword[] | null;
-  programmingLanguages: Keyword[] | null;
+  skills: Keyword[] | null
+  technologies: Keyword[] | null
+  programmingLanguages: Keyword[] | null
 }
 
 const KeywordsSection: React.FC<KeywordsSectionProps> = ({ programmingLanguages, skills, technologies }) => {
-  const { t } = useTranslation('common');
+  const { t } = useTranslation('common')
 
   return (
     <section className="container container-narrow text-center">
@@ -120,7 +120,7 @@ const KeywordsSection: React.FC<KeywordsSectionProps> = ({ programmingLanguages,
         </div>
       </div>
     </section>
-  );
-};
+  )
+}
 
-export default KeywordsSection;
+export default KeywordsSection

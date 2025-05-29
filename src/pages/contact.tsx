@@ -1,59 +1,59 @@
-import { useState } from 'react';
-import Head from 'next/head';
-import { ContactForm } from '@/models/contact-models';
-import { JelaApi } from '@/api/jela-api';
-import ReCAPTCHA from 'react-google-recaptcha';
-import { useRouter } from 'next/router';
-import Script from 'next/script';
-import { GetStaticProps } from 'next';
-import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
-import { useAppContext } from '@/app-context';
+import { useState } from 'react'
+import Head from 'next/head'
+import { ContactForm } from '@/models/contact-models'
+import { JelaApi } from '@/api/jela-api'
+import ReCAPTCHA from 'react-google-recaptcha'
+import { useRouter } from 'next/router'
+import Script from 'next/script'
+import { GetStaticProps } from 'next'
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
+import { useAppContext } from '@/app-context'
 
 export const getStaticProps: GetStaticProps = async ({ locale }) => ({
   props: {
     ...(await serverSideTranslations(locale || 'en', ['common'])),
   },
-});
+})
 
 const ContactPage = () => {
-  const { t } = useAppContext();
-  const router = useRouter();
+  const { t } = useAppContext()
+  const router = useRouter()
   const [formData, setFormData] = useState<ContactForm>({
     name: '',
     email: '',
     subject: '',
     message: '',
-  });
-  const [captchaToken, setCaptchaToken] = useState<string | null>(null);
-  const [errors, setErrors] = useState<{ [key: string]: string }>({});
+  })
+  const [captchaToken, setCaptchaToken] = useState<string | null>(null)
+  const [errors, setErrors] = useState<{ [key: string]: string }>({})
 
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
+    e.preventDefault()
 
     if (!captchaToken) {
-      setErrors({ captcha: t('reCaptchaMissing') });
-      return;
+      setErrors({ captcha: t('reCaptchaMissing') })
+      return
     }
 
     try {
-      await JelaApi.submitContactForm({ ...formData, captchaToken });
-      setFormData({ name: '', email: '', subject: '', message: '' });
-      setErrors({});
-      router.push('/thank-you');
+      await JelaApi.submitContactForm({ ...formData, captchaToken })
+      setFormData({ name: '', email: '', subject: '', message: '' })
+      setErrors({})
+      router.push('/thank-you')
     } catch (error: any) {
-      setErrors(error);
+      setErrors(error)
     }
-  };
+  }
 
   const handleCaptchaChange = (token: string | null) => {
-    setCaptchaToken(token);
+    setCaptchaToken(token)
     if (token) {
       setErrors((prevErrors) => {
-        const { captcha, ...rest } = prevErrors;
-        return rest;
-      });
+        const { captcha, ...rest } = prevErrors
+        return rest
+      })
     }
-  };
+  }
 
   return (
     <>
@@ -177,7 +177,7 @@ const ContactPage = () => {
         </form>
       </main>
     </>
-  );
-};
+  )
+}
 
-export default ContactPage;
+export default ContactPage

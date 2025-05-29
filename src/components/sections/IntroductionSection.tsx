@@ -1,7 +1,7 @@
-import { Introduction } from '@/models/cover-models';
+import { Introduction } from '@/models/cover-models'
 
 interface IntroductionSectionProps {
-  intro: Introduction | null;
+  intro: Introduction | null
 }
 
 const IntroductionSection: React.FC<IntroductionSectionProps> = ({ intro }) => (
@@ -20,7 +20,7 @@ const IntroductionSection: React.FC<IntroductionSectionProps> = ({ intro }) => (
               <picture>
                 <source
                   media="(max-width:767px)"
-                  srcSet={'https://jerejunttila.fi' + intro.smallAvatar}
+                  srcSet={'https://jerejunttila.fi/media/' + intro.smallAvatar}
                   width="400"
                   height="208"
                 />
@@ -84,6 +84,6 @@ const IntroductionSection: React.FC<IntroductionSectionProps> = ({ intro }) => (
       )}
     </div>
   </section>
-);
+)
 
-export default IntroductionSection;
+export default IntroductionSection

@@ -1,16 +1,16 @@
-import Head from 'next/head';
-import { GetStaticProps } from 'next';
-import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
-import { useAppContext } from '@/app-context';
+import Head from 'next/head'
+import { GetStaticProps } from 'next'
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
+import { useAppContext } from '@/app-context'
 
 export const getStaticProps: GetStaticProps = async ({ locale }) => ({
   props: {
     ...(await serverSideTranslations(locale || 'en', ['common'])),
   },
-});
+})
 
 const ThankYouPage = () => {
-  const { t } = useAppContext();
+  const { t } = useAppContext()
 
   return (
     <>
@@ -22,7 +22,7 @@ const ThankYouPage = () => {
         <p className="fw-semibold">{t('thankYouMessage')}</p>
       </main>
     </>
-  );
-};
+  )
+}
 
-export default ThankYouPage;
+export default ThankYouPage
