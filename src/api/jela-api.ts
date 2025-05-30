@@ -1,7 +1,7 @@
-import { ContactForm } from '@/models/contact-models'
-import { Education, Experience, Introduction, Keyword, KeywordType } from '@/models/cover-models'
-import { Project } from '@/models/projects-models'
-import { i18n } from 'next-i18next'
+import { ContactForm } from '@/app/contact/models'
+import { Education, Experience, Introduction, Keyword, KeywordType } from '@/app/models'
+import { Project } from '@/app/projects/models'
+import i18n from '@/utils/i18nClient'
 
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || ''
 

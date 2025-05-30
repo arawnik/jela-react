@@ -1,13 +1,15 @@
-import { i18n } from 'i18next'
-import React, { ReactNode, createContext, useCallback, useContext, useEffect, useState } from 'react'
-import { useTranslation } from 'next-i18next'
+'use client'
+
+import React, { createContext, JSX, ReactNode, useCallback, useContext, useEffect, useState } from 'react'
+import { useTranslation } from 'react-i18next'
+import i18n from '@/utils/i18nClient'
 
 type Language = 'fi' | 'en'
 type Theme = 'light' | 'dark'
 
 interface AppContextProps {
-  i18n: i18n | undefined
-  t: (value: string) => string
+  t: (key: string) => string
+  i18n: typeof i18n
   setLanguage: (language: Language) => void
   oppositeLanguage: Language
   theme: Theme
@@ -16,33 +18,35 @@ interface AppContextProps {
 
 const AppContext = createContext<AppContextProps | undefined>(undefined)
 
-export const AppContextProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
-  const { t, i18n } = useTranslation('common')
-  const [oppositeLanguage, setOppositeLanguage] = useState<Language>('en')
+type AppContextProviderProps = {
+  children: ReactNode
+}
+
+export const AppContextProvider = ({ children }: AppContextProviderProps): JSX.Element => {
+  const { t } = useTranslation('common')
+  const [language, setLanguageState] = useState<Language>('en')
   const [theme, setTheme] = useState<Theme>('dark')
+  const [mounted, setMounted] = useState(false)
 
   useEffect(() => {
-    const currentLanguage = localStorage.getItem('language') || navigator.language
-    if (currentLanguage.includes('fi')) {
-      i18n.changeLanguage('fi')
-      setOppositeLanguage('en')
-      localStorage.setItem('language', 'fi')
-    } else {
-      i18n.changeLanguage('en')
-      setOppositeLanguage('fi')
-      localStorage.setItem('language', 'en')
-    }
+    // Initialize Language
+    const storedLanguage = (localStorage.getItem('language') as Language) || 'en'
+    i18n.changeLanguage(storedLanguage)
+    setLanguageState(storedLanguage)
 
-    const savedTheme = (localStorage.getItem('theme') as Theme) || 'dark'
-    setTheme(savedTheme)
-    document.documentElement.setAttribute('data-bs-theme', savedTheme)
+    // Initialize Theme
+    const storedTheme = (localStorage.getItem('theme') as Theme) || 'dark'
+    setTheme(storedTheme)
+    document.documentElement.setAttribute('data-bs-theme', storedTheme)
+
+    setMounted(true)
   }, [i18n])
 
   const setLanguage = useCallback(
-    (language: Language) => {
-      i18n.changeLanguage(language)
-      localStorage.setItem('language', language)
-      setOppositeLanguage(language === 'en' ? 'fi' : 'en')
+    (lang: Language) => {
+      i18n.changeLanguage(lang)
+      localStorage.setItem('language', lang)
+      setLanguageState(lang)
     },
     [i18n]
   )
@@ -54,8 +58,15 @@ export const AppContextProvider: React.FC<{ children: ReactNode }> = ({ children
     document.documentElement.setAttribute('data-bs-theme', newTheme)
   }, [theme])
 
+  const oppositeLanguage: Language = language === 'en' ? 'fi' : 'en'
+
+  // Prevent hydration error on load
+  if (!mounted) {
+    return <></>
+  }
+
   return (
-    <AppContext.Provider value={{ i18n, t, setLanguage, oppositeLanguage, theme, toggleTheme }}>
+    <AppContext.Provider value={{ t, i18n, setLanguage, oppositeLanguage, theme, toggleTheme }}>
       {children}
     </AppContext.Provider>
   )

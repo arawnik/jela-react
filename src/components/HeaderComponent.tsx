@@ -1,17 +1,15 @@
+'use client'
+
 import Link from 'next/link'
 import Image from 'next/image'
 import { useAppContext } from '@/app-context'
-import { useRouter } from 'next/router'
+import { usePathname } from 'next/navigation'
 
 const HeaderComponent: React.FC = () => {
-  const { t, setLanguage, oppositeLanguage, toggleTheme, theme } = useAppContext()
-  const router = useRouter()
+  const { t, theme, toggleTheme, setLanguage, oppositeLanguage } = useAppContext()
+  const pathname = usePathname()
 
-  const navLinkClass = (path: string) => (router.pathname === path ? 'active' : '')
-
-  const onThemeToggle = (event: any): void => {
-    console.log('Function not implemented.')
-  }
+  const navLinkClass = (path: string) => (pathname === path ? 'active' : '')
 
   return (
     <header>

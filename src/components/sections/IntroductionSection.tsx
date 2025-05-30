@@ -1,10 +1,11 @@
-import { Introduction } from '@/models/cover-models'
+import { Introduction } from '@/app/models'
+import { JSX } from 'react'
 
 interface IntroductionSectionProps {
   intro: Introduction | null
 }
 
-const IntroductionSection: React.FC<IntroductionSectionProps> = ({ intro }) => (
+const IntroductionSection = ({ intro }: IntroductionSectionProps): JSX.Element => (
   <section>
     <div className="container container-narrow text-center">
       <p className="aphorism">
