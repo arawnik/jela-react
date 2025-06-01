@@ -8,7 +8,7 @@ This is a [React](https://react.dev) (with [Next.js](https://nextjs.org) framewo
 
 ## Prerequisites
 
-- [Node.js](https://nodejs.org/en) (developed with v20.18.0)
+- [Node.js](https://nodejs.org/en) (developed with v22.15.0)
 
 ## Testing locally
 
