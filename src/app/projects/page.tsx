@@ -1,17 +1,10 @@
+'use client'
+
 import { JelaApi } from '@/api/jela-api'
-import { Project } from '@/models/projects-models'
+import { Project } from '@/app/projects/models'
 import Head from 'next/head'
 import { useEffect, useState } from 'react'
-
-import { GetStaticProps } from 'next'
-import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import { useAppContext } from '@/app-context'
-
-export const getStaticProps: GetStaticProps = async ({ locale }) => ({
-  props: {
-    ...(await serverSideTranslations(locale || 'en', ['common'])),
-  },
-})
 
 const ProjectsPage = () => {
   const { t, i18n } = useAppContext()

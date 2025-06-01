@@ -1,19 +1,13 @@
+'use client'
+
 import { useState } from 'react'
 import Head from 'next/head'
-import { ContactForm } from '@/models/contact-models'
+import { ContactForm } from '@/app/contact/models'
 import { JelaApi } from '@/api/jela-api'
 import ReCAPTCHA from 'react-google-recaptcha'
-import { useRouter } from 'next/router'
+import { useRouter } from 'next/navigation'
 import Script from 'next/script'
-import { GetStaticProps } from 'next'
-import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import { useAppContext } from '@/app-context'
-
-export const getStaticProps: GetStaticProps = async ({ locale }) => ({
-  props: {
-    ...(await serverSideTranslations(locale || 'en', ['common'])),
-  },
-})
 
 const ContactPage = () => {
   const { t } = useAppContext()
@@ -172,7 +166,7 @@ const ContactPage = () => {
             type="submit"
             className="btn btn-primary btn-block"
           >
-            Send
+            {t('send')}
           </button>
         </form>
       </main>

@@ -1,14 +1,15 @@
-import { ContactForm } from '@/models/contact-models'
-import { Education, Experience, Introduction, Keyword, KeywordType } from '@/models/cover-models'
-import { Project } from '@/models/projects-models'
-import { i18n } from 'next-i18next'
+import { ContactForm } from '@/app/contact/models'
+import { Education, Experience, Introduction, Keyword, KeywordType } from '@/app/models'
+import { Project } from '@/app/projects/models'
+import i18n from '@/utils/i18nClient'
+import i18nextConfig from '../../next-i18next.config'
 
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || ''
 
 export class JelaApi {
   // Helper function to handle GET requests with language header
   private static async fetchJson<T>(url: string, defaultValue: T): Promise<T> {
-    const currentLanguage = i18n?.language || 'en'
+    const currentLanguage = i18n?.language || i18nextConfig.i18n.defaultLocale
 
     try {
       const response = await fetch(url, {

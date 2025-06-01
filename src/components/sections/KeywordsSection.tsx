@@ -1,5 +1,6 @@
-import { Keyword } from '@/models/cover-models'
-import { useTranslation } from 'next-i18next'
+import { useAppContext } from '@/app-context'
+import { Keyword } from '@/app/models'
+import { JSX } from 'react'
 
 interface KeywordsSectionProps {
   skills: Keyword[] | null
@@ -7,8 +8,8 @@ interface KeywordsSectionProps {
   programmingLanguages: Keyword[] | null
 }
 
-const KeywordsSection: React.FC<KeywordsSectionProps> = ({ programmingLanguages, skills, technologies }) => {
-  const { t } = useTranslation('common')
+const KeywordsSection = ({ programmingLanguages, skills, technologies }: KeywordsSectionProps): JSX.Element => {
+  const { t } = useAppContext()
 
   return (
     <section className="container container-narrow text-center">

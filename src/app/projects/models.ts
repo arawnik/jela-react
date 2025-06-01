@@ -1,4 +1,4 @@
-import { Keyword } from './cover-models'
+import { Keyword } from '../models'
 
 export interface Project {
   name: string

@@ -1,13 +1,7 @@
-import Head from 'next/head'
-import { GetStaticProps } from 'next'
-import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
-import { useAppContext } from '@/app-context'
+'use client'
 
-export const getStaticProps: GetStaticProps = async ({ locale }) => ({
-  props: {
-    ...(await serverSideTranslations(locale || 'en', ['common'])),
-  },
-})
+import Head from 'next/head'
+import { useAppContext } from '@/app-context'
 
 const ThankYouPage = () => {
   const { t } = useAppContext()
