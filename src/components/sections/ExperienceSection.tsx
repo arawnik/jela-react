@@ -54,7 +54,6 @@ const ExperienceSection = ({ experiences }: ExperienceSectionProps): JSX.Element
                   <p className="h4">{formatEraText(experience.startDate, experience.endDate)}</p>
                   <p className="h5">
                     {experience.title}
-                    {experience.company && experience.company.name ? `, ${experience.company.name}` : ''}
                   </p>
                 </div>
                 <div className="timeline-right col-md-6">
