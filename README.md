@@ -1,8 +1,10 @@
 # Important Notices
 
-This project is personal work and is not maintained actively. The core functionalities are set up so updates are on inspiration basis.
+This was initial version for creating a react frontend for my CV site that was running on django backend. 
 
-This is a [React](https://react.dev) (with [Next.js](https://nextjs.org) framework) app version for my CV frontend.
+This version is no longer maintained, evolved version now resides as part of my [Kulku solution](https://github.com/arawnik/Kulku/tree/main/src/Kulku.Web/kulku.web.client).
+
+This was a [React](https://react.dev) (with [Next.js](https://nextjs.org) framework) app version for my CV frontend.
 
 # Getting Started
 
